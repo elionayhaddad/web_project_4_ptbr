@@ -1,0 +1,10 @@
+.cards {
+  width: 69%;
+  max-width: 880px;
+  margin: 0 auto 67px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  column-gap: 17px;
+  row-gap: 20px;
+}

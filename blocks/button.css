@@ -1,0 +1,27 @@
+.button {
+  background-color: #000;
+}
+
+.button__profile {
+  border: 1px solid #ffffff;
+  width: 3%;
+  max-width: 24px;
+  height: 24px;
+}
+.button__profile-image {
+  width: 10px;
+  height: 10px;
+}
+.button__more {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+}
+.button__more-image {
+  width: 22px;
+  height: 22px;
+}

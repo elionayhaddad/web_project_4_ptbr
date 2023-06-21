@@ -1,0 +1,31 @@
+.profile {
+  outline: 1px solid red;
+  width: 69%;
+  max-width: 880px;
+  margin: 0 auto 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.profile__image {
+  margin: 0;
+  width: 120px;
+  height: 120px;
+}
+.profile__artist-name {
+  margin: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  color: #ffffff;
+}
+.profile__text {
+  margin: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+}

@@ -48,3 +48,37 @@
   line-height: 22px;
   color: #ffffff;
 }
+@media screen and (max-width: 1279px) {
+  .profile {
+    width: 282px;
+    height: 286px;
+    margin: 0 auto 36px;
+    display: flex;
+    flex-direction: column;
+  }
+  .profile__image {
+    margin: 0 auto 30px;
+  }
+  .profile__artist {
+    color: #fff;
+    text-align: center;
+    font-size: 22px;
+    font-family: Inter;
+    font-weight: 500;
+    line-height: 26.63px;
+  }
+  .profile__info {
+    outline: 1px solid red;
+    width: 282px;
+    height: 77px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .profile__info_edit {
+    outline: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+  }
+}

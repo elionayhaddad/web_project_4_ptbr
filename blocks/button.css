@@ -12,3 +12,16 @@
   width: 10px;
   height: 10px;
 }
+@media screen and (max-width: 1279px) {
+  .button__profile {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button__profile-image {
+    width: 250%;
+    height: 100%;
+  }
+}

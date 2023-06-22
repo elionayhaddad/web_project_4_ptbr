@@ -1,15 +1,12 @@
 .profile {
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   width: 69%;
   max-width: 880px;
   margin: 0 auto 50px;
-  /* display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between; */
+  justify-content: space-between;
   display: grid;
-  grid-template-columns: 150px 580px 150px;
-  gap: 10px;
+  grid-template-columns: repeat(6, 1fr);
 }
 .profile__image {
   margin: 0;
@@ -17,15 +14,20 @@
   height: 120px;
 }
 .profile__info {
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
+  width: 415px;
+  height: 77px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  grid-column-start: 2;
+  grid-column-end: 5;
 }
 .profile__info_edit {
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   display: flex;
   flex-direction: row;
-  gap: 5px;
+  gap: 18px;
 }
 .profile__artist {
   margin: 0;
@@ -37,6 +39,7 @@
   color: #ffffff;
 }
 .profile__text {
+  /* outline: 1px solid red; */
   margin: 0;
   font-family: "Inter";
   font-style: normal;

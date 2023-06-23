@@ -15,3 +15,13 @@
   width: 22px;
   height: 22px;
 }
+@media screen and (max-width: 1279px) {
+  .button-add {
+    width: 100%;
+    max-width: 282px;
+  }
+  .button-add__image {
+    width: 16px;
+    height: 16px;
+  }
+}

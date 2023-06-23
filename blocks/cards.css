@@ -8,3 +8,13 @@
   column-gap: 17px;
   row-gap: 20px;
 }
+@media screen and (max-width: 1279px) {
+  .cards {
+    width: 100%;
+    max-width: 282px;
+    margin: 0 auto 50px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

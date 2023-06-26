@@ -31,17 +31,6 @@
           <button class="button button-add" type="submit">
             <img class="button-add__image" src="images/more.svg" />
           </button>
-          <!-- <div class="popup">
-            <button class="button-close" type="button">
-              <img class="close-icon__image" src="images/close-icon.png" />
-            </button>
-            <h3>Editar perfil</h3>
-            <form class="popup__form" name="register">
-              <input type="text" name="name" placeholder="Nome" />
-              <input type="text" name="breed" placeholder="Raça" />
-              <button class="button-submit" type="submit">Salvar</button>
-            </form>
-          </div> -->
         </section>
         <section class="cards">
           <div class="card">
@@ -88,6 +77,31 @@
           </div>
         </section>
       </main>
+      <div class="popup popup_fixed">
+        <img class="button-close" src="images/close-icon.png" />
+        <form class="popup__container" name="register">
+          <h3 class="popup__title">Editar perfil</h3>
+          <fieldset class="popup__field">
+            <input
+              class="popup__field-txt"
+              type="text"
+              name="name"
+              placeholder="Nome"
+            />
+            <img class="popup__field-img" src="images/line_form.png" />
+          </fieldset>
+          <fieldset class="popup__field">
+            <input
+              class="popup__field-txt"
+              type="text"
+              name="function"
+              placeholder="Função"
+            />
+            <img class="popup__field-img" src="images/line_form.png" />
+          </fieldset>
+          <button class="button button-submit" type="submit">Salvar</button>
+        </form>
+      </div>
       <footer class="footer">
         <h4 class="footer__copyright">&copy; 2021 Around The U.S.</h4>
       </footer>

@@ -12,6 +12,9 @@
   outline: 1px solid red;
   z-index: 3;
 }
+.popup_show {
+  display: flex;
+}
 .popup__container {
   display: flex;
   flex-direction: column;

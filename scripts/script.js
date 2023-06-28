@@ -1,8 +1,8 @@
 let profile = document.querySelector(".profile");
 let popup = document.querySelector(".popup");
-let editButton = profile.querySelector(".button__profile");
-let reactButton = document.innerHTML(".card__like");
-let closeButton = popup.querySelector(".button-close");
+let editButton = profile.querySelector(".button_profile");
+let card = document.querySelector(".card");
+let closeButton = popup.querySelector(".button_close");
 
 function togglePopup() {
   popup.classList.toggle("popup_show");
@@ -26,11 +26,12 @@ function handleProfileFormSubmit(evt) {
   profile.querySelector(".profile__text").textContent = roleInput;
 }
 
-// function toggleReact() {
-//   reactButton;
-// }
-
+function toggleReact() {
+  let reactButton = card.querySelector(".card__like");
+  reactButton.classList.toggle("card__like_active");
+}
 editButton.addEventListener("click", togglePopup);
 editButton.addEventListener("click", populateForm);
 closeButton.addEventListener("click", togglePopup);
 popup.addEventListener("submit", handleProfileFormSubmit);
+card.addEventListener("click", toggleReact);

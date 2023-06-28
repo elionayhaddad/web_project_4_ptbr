@@ -1,16 +1,23 @@
 .card {
-  width: 282px;
+  width: 100%;
+  max-width: 282px;
+  height: 100%;
+  max-height: 361px;
   background-color: white;
   border-radius: 10px;
   overflow: hidden;
 }
 .card__image {
-  width: 282px;
-  height: 282px;
+  width: 100%;
+  max-width: 282px;
+  height: 78%;
+  max-height: 282px;
 }
 .card__description {
-  width: 246px;
-  height: 23px;
+  width: 100%;
+  max-width: 246px;
+  height: 6%;
+  max-height: 23px;
   margin: 25px auto 31px;
   display: flex;
   flex-direction: row;
@@ -31,9 +38,14 @@
   white-space: nowrap;
 }
 .card__like {
-  width: 21px;
-  height: 19px;
+  width: 100%;
+  max-width: 21px;
+  height: 80%;
+  max-height: 19px;
 }
 .card__like:hover {
   opacity: 0.5;
+}
+.card__like_active {
+  background-image: url(../images/like_active.svg);
 }

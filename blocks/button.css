@@ -2,29 +2,113 @@
   background-color: #000;
 }
 
-.button__profile {
+.button_profile {
   border: 1px solid #ffffff;
-  width: 24px;
-  height: 24px;
+  width: 100%;
+  max-width: 24px;
+  height: 100%;
+  max-height: 24px;
   margin-top: 15px;
 }
-.button__profile:hover {
+.button_profile:hover {
   opacity: 0.6;
 }
-.button__profile-image {
-  width: 10px;
-  height: 10px;
+.button_profile-image {
+  width: 100%;
+  max-width: 10px;
+  height: 100%;
+  max-height: 10px;
+}
+.button_add {
+  width: 150px;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+}
+.button_add:hover {
+  opacity: 0.6;
+}
+.button_add-image {
+  width: 100%;
+  max-width: 22px;
+  height: 100%;
+  max-height: 22px;
+}
+.button_close {
+  background-color: unset;
+  position: fixed;
+  top: 19%;
+  right: 30.5%;
+  z-index: 4;
+}
+.button_close:hover {
+  opacity: 0.6;
+}
+.button_submit {
+  width: 100%;
+  max-width: 358px;
+  height: 50.2px;
+  margin: 10px auto 37px;
+  padding: 0;
+  color: #fff;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-family: Inter;
+  border-radius: 2px;
+  border-color: none;
+  border-style: none;
+}
+.button_submit:hover {
+  opacity: 0.8;
 }
 @media screen and (max-width: 1279px) {
-  .button__profile {
-    width: 18px;
-    height: 18px;
+  .button_profile {
+    width: 100%;
+    max-width: 18px;
+    height: 100%;
+    max-height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .button__profile-image {
+  .button_profile-image {
     width: 250%;
+    max-width: 10px;
     height: 100%;
+    max-height: 10px;
+  }
+  .button_add {
+    width: 100%;
+    max-width: 282px;
+  }
+  .button_add-image {
+    width: 100%;
+    max-width: 16px;
+    height: 100%;
+    max-height: 16px;
+  }
+  .button_close {
+    width: 100%;
+    max-width: 26px;
+    height: 100%;
+    max-height: 26px;
+    top: 72.62px;
+    right: 18.62px;
+  }
+  .button_submit {
+    width: 85%;
+    max-width: 238px;
+    height: 100%;
+    max-height: 46px;
+    margin: 16px auto 25px;
+    font-size: 14px;
   }
 }

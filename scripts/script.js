@@ -1,16 +1,16 @@
-let profile = document.querySelector(".profile");
-let popup = document.querySelector(".popup");
-let editButton = profile.querySelector(".button_profile");
-let card = document.querySelector(".card");
-let closeButton = popup.querySelector(".button_close");
+const profile = document.querySelector(".profile");
+const popup = document.querySelector(".popup");
+const editButton = profile.querySelector(".button_profile");
+const card = document.querySelector(".card");
+const closeButton = popup.querySelector(".button_close");
 
 function togglePopup() {
   popup.classList.toggle("popup_show");
 }
 
 function populateForm() {
-  let nameArtist = profile.querySelector(".profile__artist").textContent;
-  let roleArtist = profile.querySelector(".profile__text").textContent;
+  const nameArtist = profile.querySelector(".profile__artist").textContent;
+  const roleArtist = profile.querySelector(".profile__text").textContent;
 
   popup.querySelector("input#name").value = nameArtist;
   popup.querySelector("input#role").value = roleArtist;
@@ -19,15 +19,15 @@ function populateForm() {
 function handleProfileFormSubmit(evt) {
   evt.preventDefault(popup);
   popup.classList.remove("popup_show");
-  let nameInput = popup.querySelector("input#name").value;
-  let roleInput = popup.querySelector("input#role").value;
+  const nameInput = popup.querySelector("input#name").value;
+  const roleInput = popup.querySelector("input#role").value;
 
   profile.querySelector(".profile__artist").textContent = nameInput;
   profile.querySelector(".profile__text").textContent = roleInput;
 }
 
 function toggleReact() {
-  let reactButton = card.querySelector(".card__like");
+  const reactButton = card.querySelector(".card__like");
   reactButton.classList.toggle("card__like_active");
 }
 editButton.addEventListener("click", togglePopup);

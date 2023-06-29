@@ -28,23 +28,29 @@
 }
 .profile__artist {
   margin: 0;
-  font-family: "Inter";
+  font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
   color: #ffffff;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .profile__text {
   margin: 0;
-  font-family: "Inter";
+  font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   color: #ffffff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 1000px) {
   .profile {
     width: 89%;
     max-width: 282px;

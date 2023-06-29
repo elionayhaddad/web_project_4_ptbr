@@ -70,6 +70,9 @@
   .profile__artist {
     font-size: 22px;
     line-height: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .profile__info {
     width: 100%;
@@ -88,5 +91,8 @@
     margin-top: 14px;
     font-size: 14px;
     line-height: 17px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }

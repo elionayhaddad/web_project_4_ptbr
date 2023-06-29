@@ -13,6 +13,7 @@
   height: 120px;
 }
 .profile__info {
+  margin: 0 10px;
   width: 415px;
   height: 77px;
   display: flex;
@@ -68,11 +69,11 @@
     margin: 0 auto 30px;
   }
   .profile__artist {
+    width: 70%;
+    max-width: 196px;
     font-size: 22px;
     line-height: 16px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    outline: 1px solid red;
   }
   .profile__info {
     width: 100%;
@@ -80,7 +81,9 @@
     height: 100%;
     max-height: 50px;
     align-items: center;
+    overflow: hidden;
     margin-bottom: 36px;
+    outline: 1px solid red;
   }
   .profile__info_edit {
     height: 22px;
@@ -88,11 +91,11 @@
     gap: 10px;
   }
   .profile__text {
+    width: 100%;
+    max-width: 282px;
     margin-top: 14px;
     font-size: 14px;
     line-height: 17px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    text-align: center;
   }
 }

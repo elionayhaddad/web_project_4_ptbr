@@ -73,7 +73,6 @@
     max-width: 196px;
     font-size: 22px;
     line-height: 16px;
-    outline: 1px solid red;
   }
   .profile__info {
     width: 100%;
@@ -83,7 +82,6 @@
     align-items: center;
     overflow: hidden;
     margin-bottom: 36px;
-    outline: 1px solid red;
   }
   .profile__info_edit {
     height: 22px;

@@ -15,6 +15,9 @@
 .popup_show {
   display: flex;
 }
+.popup_add_show {
+  display: flex;
+}
 .popup__container {
   display: flex;
   flex-direction: column;

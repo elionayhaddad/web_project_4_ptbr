@@ -3,7 +3,9 @@ const popup = document.querySelector(".popup");
 const popupAdd = document.querySelector(".popup_add");
 const editButton = profile.querySelector(".button_profile");
 const addButton = profile.querySelector(".button_add");
+const addButtonSubmit = document.querySelector(".button__submit");
 const card = document.querySelector(".card");
+const cardContainer = document.querySelector(".cards");
 const closeButton = popup.querySelector(".button_close");
 const closeButtonAdd = popupAdd.querySelector(".button_close");
 // variável para os seis cartões iniciais da página
@@ -60,10 +62,26 @@ function handleProfileFormSubmit(evt) {
   profile.querySelector(".profile__text").textContent = roleInput;
 }
 
-function toggleReact() {
-  const reactButton = card.querySelector(".card__like");
-  reactButton.classList.toggle("card__like_active");
+function addCard(linkValue, titleValue) {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+
+  cardElement.querySelector(".card__image").value = linkValue;
+  cardElement.querySelector(".card__title").textContent = titleValue;
+  cardContainer.append(cardElement);
 }
+
+addButtonSubmit.addEventListener("click", function () {
+  const link = popupAdd.querySelector(".link");
+  const title = popupAdd.querySelector(".title");
+
+  addSong(link.value, title.value);
+});
+
+// function toggleReact() {
+//   const reactButton = card.querySelector(".card__like");
+//   reactButton.classList.toggle("card__like_active");
+// }
 
 editButton.addEventListener("click", togglePopup); // abre o popup de edição de perfil
 addButton.addEventListener("click", togglePopupAdd); // abre o popup de adição de cartão
@@ -71,4 +89,4 @@ editButton.addEventListener("click", populateForm);
 closeButton.addEventListener("click", togglePopup); // fecha o popup de edição de perfil
 closeButtonAdd.addEventListener("click", togglePopupAdd); // fecha o popup de adição de cartão
 popup.addEventListener("submit", handleProfileFormSubmit);
-card.addEventListener("click", toggleReact);
+// card.addEventListener("click", toggleReact);

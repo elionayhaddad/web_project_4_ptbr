@@ -188,7 +188,7 @@
           <h3 class="popup__title">Novo local</h3>
           <fieldset class="popup__field">
             <input
-              class="popup__field-txt"
+              class="popup__field-txt title"
               type="text"
               id="title"
               name="title"
@@ -202,10 +202,10 @@
           </fieldset>
           <fieldset class="popup__field">
             <input
-              class="popup__field-txt"
+              class="popup__field-txt link"
               type="text"
-              id="img-url"
-              name="img-url"
+              id="link"
+              name="link"
               placeholder="URL da imagem"
             />
             <img
@@ -221,6 +221,23 @@
         <h4 class="footer__copyright">&copy; 2021 Around The U.S.</h4>
       </footer>
     </div>
+    <template id="card-template">
+      <div class="card">
+        <img
+          class="card__image img-template"
+          src=""
+          alt="a vista de um lago com árvores em sua volta num crepúsculo."
+        />
+        <div class="card__description">
+          <h2 class="card__title title-template">Vale de Yosemite</h2>
+          <img
+            class="card__like"
+            src="images/like.svg"
+            alt="um botão de reação em formato de coração."
+          />
+        </div>
+      </div>
+    </template>
     <script src="scripts/script.js"></script>
   </body>
 </html>

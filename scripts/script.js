@@ -5,7 +5,7 @@ const editButton = profile.querySelector(".button_profile");
 const addButton = profile.querySelector(".button_add");
 const addButtonSubmit = document.querySelector(".button__submit");
 const card = document.querySelector(".card");
-const cardContainer = document.querySelector(".cards");
+const cardList = document.querySelector(".cards");
 const closeButton = popup.querySelector(".button_close");
 const closeButtonAdd = popupAdd.querySelector(".button_close");
 // variável para os seis cartões iniciais da página
@@ -62,21 +62,28 @@ function handleProfileFormSubmit(evt) {
   profile.querySelector(".profile__text").textContent = roleInput;
 }
 
-function addCard(linkValue, titleValue) {
+function createCard() {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const titleElement = cardElement.querySelector(".card__title");
+  const linkElement = cardElement.querySelector(".card__image");
 
-  cardElement.querySelector(".card__image").value = linkValue;
-  cardElement.querySelector(".card__title").textContent = titleValue;
-  cardContainer.append(cardElement);
+  titleElement.textContent = initialCards.name;
+  linkElement.src = initialCards.link;
+
+  cardList.append(cardElement);
 }
 
-addButtonSubmit.addEventListener("click", function () {
-  const link = popupAdd.querySelector(".link");
-  const title = popupAdd.querySelector(".title");
-
-  addSong(link.value, title.value);
+initialCards.forEach(function (card) {
+  createCard();
 });
+
+// addButtonSubmit.addEventListener("click", function () {
+//   const link = popupAdd.querySelector(".link");
+//   const title = popupAdd.querySelector(".title");
+
+//   addSong(link.value, title.value);
+// });
 
 // function toggleReact() {
 //   const reactButton = card.querySelector(".card__like");

@@ -46,25 +46,22 @@
           </button>
         </section>
         <section class="cards">
-          <div class="card">
-            <img
-              class="card__image"
-              src="images/cards-image-1.jpg"
-              alt="a vista de um lago com árvores em sua volta num crepúsculo."
-            />
-            <div class="card__description">
-              <h2 class="card__title">Vale de Yosemite</h2>
-              <img
-                class="card__like"
-                src="images/like.svg"
-                alt="um botão de reação em formato de coração."
-              />
+          <template id="card-template">
+            <div class="card">
+              <img class="card__image" src="" alt="" />
+              <div class="card__description">
+                <h2 class="card__title"></h2>
+                <img
+                  class="card__like"
+                  src="images/like.svg"
+                  alt="um botão de reação em formato de coração."
+                />
+              </div>
             </div>
-          </div>
-          <div class="card">
+          </template>
+          <!-- <div class="card">
             <img
               class="card__image"
-              src="images/cards-image-2.jpg"
               alt="lago com montanhas em sua volta numa fria manhã."
             />
             <div class="card__description">
@@ -79,7 +76,6 @@
           <div class="card">
             <img
               class="card__image"
-              src="images/cards-image-3.jpg"
               alt="A vista do fim da tarde sobre as montanhas."
             />
             <div class="card__description">
@@ -94,7 +90,6 @@
           <div class="card">
             <img
               class="card__image"
-              src="images/cards-image-4.jpg"
               alt="A vista de uma noite com o céu estrelado."
             />
             <div class="card__description">
@@ -109,7 +104,6 @@
           <div class="card">
             <img
               class="card__image"
-              src="images/cards-image-5.jpg"
               alt="imagem
             de um lago com montanhas envolta"
             />
@@ -125,7 +119,6 @@
           <div class="card">
             <img
               class="card__image"
-              src="images/cards-image-6.jpg"
               alt="imagem de um lago com uma casa contruída sobre ele, tendo ao fundo uma montanha."
             />
             <div class="card__description">
@@ -136,7 +129,7 @@
                 alt="um botão de reação em formato de coração."
               />
             </div>
-          </div>
+          </div> -->
         </section>
       </main>
       <div class="popup">
@@ -217,6 +210,7 @@
           <button class="button button_submit" type="submit">Criar</button>
         </form>
       </div>
+      /
       <footer class="footer">
         <h4 class="footer__copyright">&copy; 2021 Around The U.S.</h4>
       </footer>

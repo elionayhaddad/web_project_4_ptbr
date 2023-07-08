@@ -12,7 +12,7 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 3;
 }
-.popup_show {
+.poup_show {
   display: flex;
 }
 .popup_add_show {

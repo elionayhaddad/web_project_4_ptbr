@@ -1,6 +1,7 @@
 const profile = document.querySelector(".profile");
 const popup = document.querySelector(".popup");
 const popupAdd = document.querySelector(".popup_add");
+const popupImg = document.querySelector(".popup_image");
 const editButton = profile.querySelector(".button_profile");
 const addButton = profile.querySelector(".button_add");
 const addButtonSubmit = document.querySelector(".button__submit");
@@ -48,6 +49,10 @@ function togglePopupAdd() {
   popupAdd.classList.toggle("popup_add_show");
 }
 
+function togglePopupImage() {
+  popupImg.classList.toggle("popup_image_show");
+}
+
 function populateForm() {
   const nameArtist = profile.querySelector(".profile__artist").textContent;
   const roleArtist = profile.querySelector(".profile__text").textContent;
@@ -66,27 +71,45 @@ function handleProfileFormSubmit(evt) {
   profile.querySelector(".profile__text").textContent = roleInput;
 }
 
-function createInitialCard(card) {
-  const cardList = document.querySelector(".cards");
+const cardList = document.querySelector(".cards");
+
+function createCard(card) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const titleElement = cardElement.querySelector(".card__title");
   const linkElement = cardElement.querySelector(".card__image");
-  const buttonLikeElement = cardElement.querySelector("card__like");
+  cardElement
+    .querySelector(".card__like")
+    .addEventListener("click", function (evt) {
+      evt.target.classList.toggle("card__like_active");
+    });
 
   titleElement.textContent = card.name;
   linkElement.src = card.imageURL;
   linkElement.alt = card.name;
-  cardList.append(cardElement);
+  cardList.prepend(cardElement);
 }
 
 initialCards.forEach(function (card) {
-  createInitialCard(card);
+  createCard(card);
+});
+
+popupAdd.addEventListener("submit", function (evt) {
+  evt.preventDefault(popupAdd);
+  popupAdd.classList.remove("popup_add_show");
+  const titleInput = popupAdd.querySelector("input#title");
+  const imageUrlInput = popupAdd.querySelector("input#image-url");
+
+  const card = {
+    name: titleInput.value,
+    imageURL: imageUrlInput.value,
+  };
+  createCard(card);
 });
 
 editButton.addEventListener("click", togglePopup); // abre o popup de edição de perfil
 addButton.addEventListener("click", togglePopupAdd); // abre o popup de adição de cartão
-editButton.addEventListener("click", populateForm);
+editButton.addEventListener("click", populateForm); // carrega o conteúdo da página no formulário
 closeButton.addEventListener("click", togglePopup); // fecha o popup de edição de perfil
 closeButtonAdd.addEventListener("click", togglePopupAdd); // fecha o popup de adição de cartão
 popup.addEventListener("submit", handleProfileFormSubmit);

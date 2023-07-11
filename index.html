@@ -77,6 +77,7 @@
           <fieldset class="popup__field">
             <input
               class="popup__field-txt"
+              required
               type="text"
               id="name"
               name="name"
@@ -92,6 +93,7 @@
             <input
               class="popup__field-txt role"
               type="text"
+              required
               id="role"
               name="role"
               placeholder="Função"
@@ -115,7 +117,8 @@
           <h3 class="popup__title">Novo local</h3>
           <fieldset class="popup__field">
             <input
-              class="popup__field-txt title"
+              class="popup__field-txt"
+              required
               type="text"
               id="title"
               name="title"
@@ -129,9 +132,10 @@
           </fieldset>
           <fieldset class="popup__field">
             <input
-              class="popup__field-txt link"
+              class="popup__field-txt"
+              required
               type="text"
-              id="link"
+              id="image-url"
               name="link"
               placeholder="URL da imagem"
             />
@@ -144,7 +148,14 @@
           <button class="button button_submit" type="submit">Criar</button>
         </form>
       </div>
-      /
+      <div class="popup popup_image">
+        <img
+          class="button button_close"
+          src="images/close-icon.png"
+          alt="botão fechar"
+        />
+        <img class="card__image" src="" alt="" />
+      </div>
       <footer class="footer">
         <h4 class="footer__copyright">&copy; 2021 Around The U.S.</h4>
       </footer>

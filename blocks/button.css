@@ -51,6 +51,13 @@
 .button_close:hover {
   opacity: 0.6;
 }
+.button_close_image {
+  background-color: unset;
+  position: fixed;
+  top: 3%;
+  right: 17%;
+  z-index: 4;
+}
 .button_submit {
   width: 100%;
   max-width: 358px;

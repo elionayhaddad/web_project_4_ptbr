@@ -1,13 +1,15 @@
 const profile = document.querySelector(".profile");
+const cardList = document.querySelector(".cards");
 const popup = document.querySelector(".popup");
-const popupAdd = document.querySelector(".popup_add");
-const popupImg = document.querySelector(".popup_image");
 const editButton = profile.querySelector(".button_profile");
+const closeButton = popup.querySelector(".button_close");
+const popupAdd = document.querySelector(".popup_add");
 const addButton = profile.querySelector(".button_add");
 const addButtonSubmit = document.querySelector(".button__submit");
-const closeButton = popup.querySelector(".button_close");
 const closeButtonAdd = popupAdd.querySelector(".button_close");
-// variável para os seis cartões iniciais da página
+const popupImg = document.querySelector(".popup_image");
+const closeButtonImg = popupImg.querySelector(".button_close_image");
+
 const initialCards = [
   {
     name: "Vale de Yosemite",
@@ -71,18 +73,25 @@ function handleProfileFormSubmit(evt) {
   profile.querySelector(".profile__text").textContent = roleInput;
 }
 
-const cardList = document.querySelector(".cards");
-
 function createCard(card) {
-  const cardTemplate = document.querySelector("#card-template").content;
+  const cardTemplate = cardList.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const titleElement = cardElement.querySelector(".card__title");
   const linkElement = cardElement.querySelector(".card__image");
+  const removeButton = cardElement.querySelector(".card__remove-icon");
+
   cardElement
     .querySelector(".card__like")
     .addEventListener("click", function (evt) {
       evt.target.classList.toggle("card__like_active");
     });
+
+  removeButton.addEventListener("click", function () {
+    card = removeButton.closest(".card");
+    card.remove();
+  });
+
+  linkElement.addEventListener("click", handleImageClick);
 
   titleElement.textContent = card.name;
   linkElement.src = card.imageURL;
@@ -107,9 +116,19 @@ popupAdd.addEventListener("submit", function (evt) {
   createCard(card);
 });
 
-editButton.addEventListener("click", togglePopup); // abre o popup de edição de perfil
-addButton.addEventListener("click", togglePopupAdd); // abre o popup de adição de cartão
-editButton.addEventListener("click", populateForm); // carrega o conteúdo da página no formulário
-closeButton.addEventListener("click", togglePopup); // fecha o popup de edição de perfil
-closeButtonAdd.addEventListener("click", togglePopupAdd); // fecha o popup de adição de cartão
+function handleImageClick(event) {
+  const popupImgElement = document.querySelector(".popup_image-content");
+  const popupImgLegend = document.querySelector(".popup_image-legend");
+  popupImgElement.src = event.target.src;
+  popupImgElement.alt = event.target.alt;
+  popupImgLegend.textContent = event.target.alt;
+  togglePopupImage(popupImg);
+}
+
+editButton.addEventListener("click", togglePopup);
+addButton.addEventListener("click", togglePopupAdd);
+editButton.addEventListener("click", populateForm);
+closeButton.addEventListener("click", togglePopup);
+closeButtonAdd.addEventListener("click", togglePopupAdd);
+closeButtonImg.addEventListener("click", togglePopupImage);
 popup.addEventListener("submit", handleProfileFormSubmit);

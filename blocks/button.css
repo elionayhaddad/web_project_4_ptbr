@@ -13,7 +13,7 @@
 .button_profile:hover {
   opacity: 0.6;
 }
-.button_profile-image {
+.button__profile-image {
   width: 100%;
   max-width: 10px;
   height: 100%;
@@ -35,7 +35,7 @@
 .button_add:hover {
   opacity: 0.6;
 }
-.button_add-image {
+.button__add-image {
   width: 100%;
   max-width: 22px;
   height: 100%;

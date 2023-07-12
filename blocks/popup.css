@@ -27,17 +27,17 @@
   visibility: visible;
   opacity: 1;
 }
-.popup_image-container {
+.popup__container-image {
   padding-top: 40px;
   position: relative;
   display: flex;
   flex-direction: column;
 }
-.popup_image-link {
+.popup__link-image {
   max-width: 75vw;
   max-height: 75vh;
 }
-.popup_image-legend {
+.popup__legend-image {
   max-width: 291px;
   max-height: 12px;
   margin-top: 10px;

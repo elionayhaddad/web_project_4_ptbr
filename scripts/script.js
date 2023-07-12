@@ -117,8 +117,8 @@ popupAdd.addEventListener("submit", function (evt) {
 });
 
 function handleImageClick(event) {
-  const popupImgElement = document.querySelector(".popup_image-link");
-  const popupImgLegend = document.querySelector(".popup_image-legend");
+  const popupImgElement = document.querySelector(".popup__link-image");
+  const popupImgLegend = document.querySelector(".popup__legend-image");
   popupImgElement.src = event.target.src;
   popupImgElement.alt = event.target.alt;
   popupImgLegend.textContent = event.target.alt;

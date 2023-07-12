@@ -22,7 +22,7 @@
   grid-column-start: 2;
   grid-column-end: 5;
 }
-.profile__info_edit {
+.profile__info-edit {
   display: flex;
   flex-direction: row;
   gap: 18px;

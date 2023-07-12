@@ -43,6 +43,8 @@
 }
 .button_close {
   background-color: unset;
+  max-width: 40px;
+  max-height: 40px;
   position: fixed;
   top: 19%;
   right: 30.5%;
@@ -53,9 +55,9 @@
 }
 .button_close_image {
   background-color: unset;
-  position: fixed;
-  top: 3%;
-  right: 17%;
+  position: absolute;
+  top: 2%;
+  left: 102%;
   z-index: 4;
 }
 .button_submit {

@@ -87,7 +87,7 @@
     align-items: center;
     justify-content: center;
   }
-  .button_profile-image {
+  .button__profile-image {
     width: 250%;
     max-width: 10px;
     height: 100%;
@@ -97,7 +97,7 @@
     width: 100%;
     max-width: 282px;
   }
-  .button_add-image {
+  .button__add-image {
     width: 100%;
     max-width: 16px;
     height: 100%;

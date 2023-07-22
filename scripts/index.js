@@ -43,8 +43,14 @@ const initialCards = [
   },
 ];
 
-function togglePopup() {
-  popup.classList.toggle("popup_show");
+function openFormPopup() {
+  popup.classList.add("popup_show");
+  editButton.setAttribute("disabled", true);
+}
+
+function closeFormPopup() {
+  popup.classList.remove("popup_show");
+  editButton.removeAttribute("disabled", true);
 }
 
 function togglePopupAdd() {
@@ -59,15 +65,15 @@ function populateForm() {
   const nameArtist = profile.querySelector(".profile__artist").textContent;
   const roleArtist = profile.querySelector(".profile__text").textContent;
 
-  popup.querySelector("input#name").value = nameArtist;
-  popup.querySelector("input#role").value = roleArtist;
+  popup.querySelector("input#name-input").value = nameArtist;
+  popup.querySelector("input#role-input").value = roleArtist;
 }
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault(popup);
   popup.classList.remove("popup_show");
-  const nameInput = popup.querySelector("input#name").value;
-  const roleInput = popup.querySelector("input#role").value;
+  const nameInput = popup.querySelector("input#name-input").value;
+  const roleInput = popup.querySelector("input#role-input").value;
 
   profile.querySelector(".profile__artist").textContent = nameInput;
   profile.querySelector(".profile__text").textContent = roleInput;
@@ -106,14 +112,16 @@ initialCards.forEach(function (card) {
 popupAdd.addEventListener("submit", function (evt) {
   evt.preventDefault(popupAdd);
   popupAdd.classList.remove("popup_add_show");
-  const titleInput = popupAdd.querySelector("input#title");
-  const imageUrlInput = popupAdd.querySelector("input#image-url");
+  const titleInput = popupAdd.querySelector("input#title-input");
+  const imageUrlInput = popupAdd.querySelector("input#link-input");
 
   const card = {
     name: titleInput.value,
     imageURL: imageUrlInput.value,
   };
   createCard(card);
+  titleInput.value = "";
+  imageUrlInput.value = "";
 });
 
 function handleImageClick(event) {
@@ -125,10 +133,12 @@ function handleImageClick(event) {
   togglePopupImage(popupImg);
 }
 
-editButton.addEventListener("click", togglePopup);
+// popup.addEventListener("click", closeFormPopup);
+
+editButton.addEventListener("click", openFormPopup);
 addButton.addEventListener("click", togglePopupAdd);
 editButton.addEventListener("click", populateForm);
-closeButton.addEventListener("click", togglePopup);
+closeButton.addEventListener("click", closeFormPopup);
 closeButtonAdd.addEventListener("click", togglePopupAdd);
 closeButtonImg.addEventListener("click", togglePopupImage);
 popup.addEventListener("submit", handleProfileFormSubmit);

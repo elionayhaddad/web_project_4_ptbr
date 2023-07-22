@@ -77,6 +77,21 @@
 .button_submit:hover {
   opacity: 0.8;
 }
+.button_inactive {
+  background-color: white;
+  color: black;
+  border-radius: 2px;
+  border: 1px solid #000;
+  opacity: 0.20000000298023224;
+}
+.button_inactive:hover {
+  background-color: white;
+  color: black;
+  border-radius: 2px;
+  border: 1px solid #000;
+  opacity: 0.20000000298023224;
+}
+
 @media screen and (max-width: 1000px) {
   .button_profile {
     width: 100%;

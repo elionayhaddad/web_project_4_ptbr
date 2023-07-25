@@ -45,20 +45,24 @@ const initialCards = [
 
 function openFormPopup() {
   popup.classList.add("popup_show");
-  editButton.setAttribute("disabled", true);
 }
 
 function closeFormPopup() {
   popup.classList.remove("popup_show");
-  editButton.removeAttribute("disabled", true);
 }
 
-function togglePopupAdd() {
-  popupAdd.classList.toggle("popup_add_show");
+function openPopupAdd() {
+  popupAdd.classList.add("popup_add_show");
+}
+function closePopupAdd() {
+  popupAdd.classList.remove("popup_add_show");
 }
 
-function togglePopupImage() {
-  popupImg.classList.toggle("popup_image_show");
+function openPopupImage() {
+  popupImg.classList.add("popup_image_show");
+}
+function closePopupImage() {
+  popupImg.classList.remove("popup_image_show");
 }
 
 function populateForm() {
@@ -130,15 +134,33 @@ function handleImageClick(event) {
   popupImgElement.src = event.target.src;
   popupImgElement.alt = event.target.alt;
   popupImgLegend.textContent = event.target.alt;
-  togglePopupImage(popupImg);
+  openPopupImage(popupImg);
 }
 
-// popup.addEventListener("click", closeFormPopup);
+function handleOverlayClick() {
+  const overlay = popup.querySelector("div#overflow");
+  const overlayAdd = popupAdd.querySelector("div#overflow-add");
+  const overlayImg = popupImg.querySelector("div#overflow-image");
+
+  overlay.addEventListener("click", closeFormPopup);
+  overlayAdd.addEventListener("click", closePopupAdd);
+  overlayImg.addEventListener("click", closePopupImage);
+}
+handleOverlayClick();
+
+function keyHandler(evt) {
+  if (evt.key === "Escape") {
+    closeFormPopup();
+    closePopupAdd();
+    closePopupImage();
+  }
+}
+document.addEventListener("keyup", keyHandler);
 
 editButton.addEventListener("click", openFormPopup);
-addButton.addEventListener("click", togglePopupAdd);
+addButton.addEventListener("click", openPopupAdd);
 editButton.addEventListener("click", populateForm);
 closeButton.addEventListener("click", closeFormPopup);
-closeButtonAdd.addEventListener("click", togglePopupAdd);
-closeButtonImg.addEventListener("click", togglePopupImage);
+closeButtonAdd.addEventListener("click", closePopupAdd);
+closeButtonImg.addEventListener("click", closePopupImage);
 popup.addEventListener("submit", handleProfileFormSubmit);

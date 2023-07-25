@@ -37,6 +37,14 @@ Mais uma vez, foi utilizado a estrutura de arquivos da metodologia BEM: a separa
 
 Sendo a novidade carro-chefe deste projeto, a linguagem JavaScript entra em cena dando vida ao formulário de edição de perfil. Ao clicar no botão de edição, o formulario deve abrir se sobrepondo à pagina, e já tendo preenchido em seus campos o conteúdo de texto que aparece no perfil por padrão no perfil (nome e função). O formulário deve conter acima um botão close que ao ser clicado deve fechá-lo. Para a edição, temos os campos que serão depois de preenchidos com a nova informação, e logo abaixo um botão "Salvar", que após clicado, deve atualizar a página com os novos valores. Para realizar isso, foram usados: a seleção de elementos DOM: querySelector(); o método "classList" dentro das funções do manipulador, a inserção de novos valores pelo textContent, e por fim, eventos com o addEventListener(). No pop-up com o formulário de adição de cartão não é ocorre muito diferente, o que mudou é que todos os cartões devem ser adicionados em uma função JS, sendo os iniciais obtidos de um vetor, e vir com um ícone de uma lixeira, que possibilita excluir os mesmos cartões. O método closest() em junção com o remove(), se encarregaram disso. Para o botão de curtida, foi-se usado o evt.target para realizar o disparo.
 
+#### JavaScript e Validação de Formulário
+
+Como aprimoramento ao projeto, foi inserido também a validação do formulário. Portanto, se alguns dos campos estiverem vazios, ou inválidos por não atenderem aos requisitos para validação, os botões de envio permanecem inativos.
+
+#### Manipulação de Eventos de Teclado e Mouse
+
+Como uma segunda novidade, os pop-ups poderão ser fechados clicando na sobreposição (overlay) do formulário, ou clicando na tecla "Esc". Isso graças ao "keyup" para o evento de teclado, e "click" para o evento com o mouse.
+
 ### Páginas do GitHub
 
 Acredito que depois de ter um breve resumo do que se trata o projeto, e das técnicas/tecnologias usadas para a sua construção, nada será mais esclarecedor que ver com os próprios olhos o resultado final do website. Você poderá conferir através do link:

@@ -155,8 +155,8 @@ function keyHandler(evt) {
     closePopupImage();
   }
 }
-document.addEventListener("keyup", keyHandler);
 
+document.addEventListener("keyup", keyHandler);
 editButton.addEventListener("click", openFormPopup);
 addButton.addEventListener("click", openPopupAdd);
 editButton.addEventListener("click", populateForm);

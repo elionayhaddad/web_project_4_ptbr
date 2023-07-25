@@ -13,11 +13,6 @@
   visibility: hidden;
   opacity: 0;
 }
-.popup_overflow {
-  background: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  height: 100vh;
-}
 .popup_show {
   visibility: visible;
   opacity: 1;
@@ -29,6 +24,11 @@
 .popup_image_show {
   visibility: visible;
   opacity: 1;
+}
+.popup__overflow {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
 }
 .popup__container {
   position: absolute;

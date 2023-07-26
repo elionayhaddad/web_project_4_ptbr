@@ -148,14 +148,14 @@ function handleOverlayClick() {
 }
 handleOverlayClick();
 
-function keyHandler(evt) {
-  if (evt.key === "Escape") {
+function keyHandler(event) {
+  if (event.key === "Escape") {
     closeFormPopup();
     closePopupAdd();
     closePopupImage();
   }
+  event.target.removeEventListener("keyup", keyHandler);
 }
-
 document.addEventListener("keyup", keyHandler);
 editButton.addEventListener("click", openFormPopup);
 addButton.addEventListener("click", openPopupAdd);

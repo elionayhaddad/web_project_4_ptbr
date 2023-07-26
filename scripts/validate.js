@@ -5,7 +5,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   errorElement.classList.add("popup__input-error_active");
 };
 
-const hideInputError = (formElement, inputElement, errorMessage) => {
+const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove("popup__input_type_error");
   errorElement.classList.remove("popup__input-error_active");
@@ -20,11 +20,8 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
-const isInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
+const isInvalidInput = (inputList) =>
+  inputList.some((inputElement) => !inputElement.validity.valid);
 
 const toggleButtonState = (inputList, buttonElement) => {
   if (isInvalidInput(inputList)) {
@@ -41,8 +38,8 @@ const setEventListeners = (formElement) => {
     formElement.querySelectorAll(".popup__field-txt")
   );
   const buttonElement = formElement.querySelector(".button_submit");
-
-  toggleButtonState(inputList, buttonElement);
+  buttonElement.setAttribute("disabled", true);
+  buttonElement.classList.add("button_inactive");
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {

@@ -1,5 +1,6 @@
 .button {
   background-color: #000;
+  cursor: pointer;
 }
 
 .button_profile {
@@ -78,6 +79,7 @@
   opacity: 0.8;
 }
 .button_inactive {
+  cursor: default;
   background-color: white;
   color: black;
   border-radius: 2px;

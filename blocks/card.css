@@ -10,11 +10,16 @@
   overflow: hidden;
 }
 .card__remove-icon {
+  cursor: pointer;
   position: absolute;
   top: 18px;
   right: 15px;
 }
+.card__remove-icon:hover {
+  opacity: 0.5;
+}
 .card__image {
+  cursor: pointer;
   width: 100%;
   max-width: 282px;
   height: 78%;
@@ -45,6 +50,7 @@
   white-space: nowrap;
 }
 .card__like {
+  cursor: pointer;
   width: 100%;
   max-width: 21px;
   height: 80%;

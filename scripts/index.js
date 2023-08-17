@@ -1,69 +1,37 @@
-const profile = document.querySelector(".profile");
 const cardList = document.querySelector(".cards");
-const popup = document.querySelector(".popup");
-const editButton = profile.querySelector(".button_profile");
-const closeButton = popup.querySelector(".button_close");
-const popupAdd = document.querySelector(".popup_add");
-const addButton = profile.querySelector(".button_add");
-const addButtonSubmit = document.querySelector(".button__submit");
-const closeButtonAdd = popupAdd.querySelector(".button_close");
-const popupImg = document.querySelector(".popup_image");
-const closeButtonImg = popupImg.querySelector(".button_close_image");
 
 const initialCards = [
   {
     name: "Vale de Yosemite",
-    imageURL:
+    imageUrl:
       "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
   },
   {
     name: "Lago Louise",
-    imageURL:
+    imageUrl:
       "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
   },
   {
     name: "Montanhas Carecas",
-    imageURL:
+    imageUrl:
       "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
   },
   {
     name: "Latemar",
-    imageURL:
+    imageUrl:
       "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
   },
   {
     name: "Parque Nacional da Vanoise ",
-    imageURL:
+    imageUrl:
       "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
   },
   {
     name: "Lago di Braies",
-    imageURL:
+    imageUrl:
       "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
   },
 ];
-
-function openFormPopup() {
-  popup.classList.add("popup_show");
-}
-
-function closeFormPopup() {
-  popup.classList.remove("popup_show");
-}
-
-function openPopupAdd() {
-  popupAdd.classList.add("popup_add_show");
-}
-function closePopupAdd() {
-  popupAdd.classList.remove("popup_add_show");
-}
-
-function openPopupImage() {
-  popupImg.classList.add("popup_image_show");
-}
-function closePopupImage() {
-  popupImg.classList.remove("popup_image_show");
-}
 
 function populateForm() {
   const nameArtist = profile.querySelector(".profile__artist").textContent;
@@ -83,34 +51,14 @@ function handleProfileFormSubmit(evt) {
   profile.querySelector(".profile__text").textContent = roleInput;
 }
 
-function createCard(card) {
-  const cardTemplate = cardList.querySelector("#card-template").content;
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const titleElement = cardElement.querySelector(".card__title");
-  const linkElement = cardElement.querySelector(".card__image");
-  const removeButton = cardElement.querySelector(".card__remove-icon");
-
-  cardElement
-    .querySelector(".card__like")
-    .addEventListener("click", function (evt) {
-      evt.target.classList.toggle("card__like_active");
-    });
-
-  removeButton.addEventListener("click", function () {
-    card = removeButton.closest(".card");
-    card.remove();
-  });
-
-  linkElement.addEventListener("click", handleImageClick);
-
-  titleElement.textContent = card.name;
-  linkElement.src = card.imageURL;
-  linkElement.alt = card.name;
+function createCard(item) {
+  const card = new Card(item.name, item.imageUrl, ".card-template");
+  const cardElement = card.generateCard();
   cardList.prepend(cardElement);
 }
 
-initialCards.forEach(function (card) {
-  createCard(card);
+initialCards.forEach((item) => {
+  createCard(item);
 });
 
 popupAdd.addEventListener("submit", function (evt) {
@@ -121,46 +69,35 @@ popupAdd.addEventListener("submit", function (evt) {
 
   const card = {
     name: titleInput.value,
-    imageURL: imageUrlInput.value,
+    imageUrl: imageUrlInput.value,
   };
   createCard(card);
   titleInput.value = "";
   imageUrlInput.value = "";
 });
 
-function handleImageClick(event) {
-  const popupImgElement = document.querySelector(".popup__link-image");
-  const popupImgLegend = document.querySelector(".popup__legend-image");
-  popupImgElement.src = event.target.src;
-  popupImgElement.alt = event.target.alt;
-  popupImgLegend.textContent = event.target.alt;
-  openPopupImage(popupImg);
-}
-
-function handleOverlayClick() {
-  const overlay = popup.querySelector("div#overflow");
-  const overlayAdd = popupAdd.querySelector("div#overflow-add");
-  const overlayImg = popupImg.querySelector("div#overflow-image");
-
-  overlay.addEventListener("click", closeFormPopup);
-  overlayAdd.addEventListener("click", closePopupAdd);
-  overlayImg.addEventListener("click", closePopupImage);
-}
-handleOverlayClick();
-
-function keyHandler(event) {
-  if (event.key === "Escape") {
-    closeFormPopup();
-    closePopupAdd();
-    closePopupImage();
-  }
-  event.target.removeEventListener("keyup", keyHandler);
-}
-document.addEventListener("keyup", keyHandler);
-editButton.addEventListener("click", openFormPopup);
-addButton.addEventListener("click", openPopupAdd);
 editButton.addEventListener("click", populateForm);
-closeButton.addEventListener("click", closeFormPopup);
-closeButtonAdd.addEventListener("click", closePopupAdd);
-closeButtonImg.addEventListener("click", closePopupImage);
 popup.addEventListener("submit", handleProfileFormSubmit);
+
+import FormValidator from "./FormValidator.js";
+import Card from "./card.js";
+import {
+  popup,
+  popupAdd,
+  popupImg,
+  editButton,
+  profile,
+  addButton,
+  closeButton,
+  closeButtonAdd,
+  closeButtonImg,
+  openFormPopup,
+  closeFormPopup,
+  openPopupAdd,
+  closePopupAdd,
+  openPopupImage,
+  closePopupImage,
+  handleOverlayClick,
+  keyHandler,
+  setEventListeners,
+} from "./utils.js";

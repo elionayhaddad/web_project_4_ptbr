@@ -79,8 +79,8 @@ popupAdd.addEventListener("submit", function (evt) {
 editButton.addEventListener("click", populateForm);
 popup.addEventListener("submit", handleProfileFormSubmit);
 
-import FormValidator from "./FormValidator.js";
-import Card from "./card.js";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/card.js";
 import {
   popup,
   popupAdd,
@@ -100,4 +100,4 @@ import {
   handleOverlayClick,
   keyHandler,
   setEventListeners,
-} from "./utils.js";
+} from "../components/utils.js";

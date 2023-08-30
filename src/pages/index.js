@@ -1,3 +1,9 @@
+import FormValidator from "../../src/components/FormValidator.js";
+import Card from "../../src/components/card.js";
+import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+
 const cardList = document.querySelector(".cards");
 
 const initialCards = [
@@ -51,15 +57,26 @@ function handleProfileFormSubmit(evt) {
   profile.querySelector(".profile__text").textContent = roleInput;
 }
 
-function createCard(item) {
-  const card = new Card(item.name, item.imageUrl, ".card-template");
-  const cardElement = card.generateCard();
-  cardList.prepend(cardElement);
-}
+const popupWithImage = new PopupWithImage();
 
-initialCards.forEach((item) => {
-  createCard(item);
-});
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item.name, item.imageUrl, ".card-template");
+      const cardElement = card.generateCard();
+      cardList.prepend(cardElement);
+      return cardElement;
+    },
+  },
+  ".cards"
+);
+
+section.renderItems(initialCards);
+
+// initialCards.forEach((item) => {
+//   section.renderItems(item);
+// });
 
 popupAdd.addEventListener("submit", function (evt) {
   evt.preventDefault(popupAdd);
@@ -71,7 +88,7 @@ popupAdd.addEventListener("submit", function (evt) {
     name: titleInput.value,
     imageUrl: imageUrlInput.value,
   };
-  createCard(card);
+  section.addItem(item);
   titleInput.value = "";
   imageUrlInput.value = "";
 });
@@ -79,8 +96,18 @@ popupAdd.addEventListener("submit", function (evt) {
 editButton.addEventListener("click", populateForm);
 popup.addEventListener("submit", handleProfileFormSubmit);
 
-import FormValidator from "../components/FormValidator.js";
-import Card from "../components/card.js";
+// config({
+//   formSelector: ".popup__container",
+//   inputSelector: ".popup__field-txt",
+//   submitButtonSelector: ".button_submit",
+//   inactiveButtonClass: "button_inactive",
+//   inputErrorClass: "popup__input_type_error",
+//   errorClass: "popup__input-error_active",
+// });
+
+// const formValidator = new FormValidator(config, formElement);
+// formValidator.enableValidation();
+
 import {
   popup,
   popupAdd,
@@ -91,13 +118,7 @@ import {
   closeButton,
   closeButtonAdd,
   closeButtonImg,
-  openFormPopup,
-  closeFormPopup,
-  openPopupAdd,
-  closePopupAdd,
-  openPopupImage,
-  closePopupImage,
-  handleOverlayClick,
+  // handleOverlayClick,
   keyHandler,
   setEventListeners,
-} from "../components/utils.js";
+} from "../../src/components/utils.js";

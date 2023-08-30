@@ -1,4 +1,4 @@
-import { popupImg, openPopupImage } from "./utils.js";
+import { popupImg } from "../../src/components/utils.js";
 
 export default class Card {
   constructor(name, imageUrl, cardSelector) {
@@ -48,14 +48,14 @@ export default class Card {
     linkElement.addEventListener("click", this._handleImageClick);
   }
 
-  _handleImageClick(event) {
-    const popupImgElement = document.querySelector(".popup__link-image");
-    const popupImgLegend = document.querySelector(".popup__legend-image");
-    popupImgElement.src = event.target.src;
-    popupImgElement.alt = event.target.alt;
-    popupImgLegend.textContent = event.target.alt;
-    openPopupImage(popupImg);
-  }
+  // _handleImageClick(event) {
+  //   const popupImgElement = document.querySelector(".popup__link-image");
+  //   const popupImgLegend = document.querySelector(".popup__legend-image");
+  //   popupImgElement.src = event.target.src;
+  //   popupImgElement.alt = event.target.alt;
+  //   popupImgLegend.textContent = event.target.alt;
+  //   openPopupImage(popupImg);
+  // }
 }
 
 /*function createCard(card) {

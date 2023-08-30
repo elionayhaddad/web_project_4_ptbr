@@ -69,15 +69,6 @@ class FormValidator {
       });
       setEventListeners(formElement);
     });
-
-    return enableValidation({
-      formSelector: ".popup__container",
-      inputSelector: ".popup__field-txt",
-      submitButtonSelector: ".button_submit",
-      inactiveButtonClass: "button_inactive",
-      inputErrorClass: "popup__input_type_error",
-      errorClass: "popup__input-error_active",
-    });
   }
 }
 

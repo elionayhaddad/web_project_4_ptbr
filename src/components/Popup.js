@@ -22,11 +22,11 @@ export default class Popup {
     }
   }
 
-  setEventListener() {
+  setEventListeners() {
     closeButton.addEventListener("click", this.close());
-    this._popup.addEventListener("click", (evt) => {
-      if (evt.target.classList.contains("popup")) {
-        this.close();
+    this._popup.addEventListener("click", (event) => {
+      if (event.target.classList.contains("popup__overflow")) {
+        this.close(this._popup);
       }
     });
   }

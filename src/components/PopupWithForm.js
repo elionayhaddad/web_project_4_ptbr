@@ -3,20 +3,27 @@ import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
   constructor(submitHandler, popupSelector) {
     super(popupSelector);
+    this._form = this._popup.querySelector(".popup__container");
     this._submitHandler = submitHandler;
   }
   _getInputValues() {
-    this._data = document.querySelectorAll(".popup__field-txt");
-    return this._data;
+    const inputElement = this._form.querySelectorAll(".popup__field-txt");
+    const values = {};
+    inputElement.forEach((input) => {
+      values[input.name] = input.value;
+    });
+    return values;
   }
   setEventListeners() {
-    const buttonElement = document.querySelector(".button_submit");
-    super.setEventListener();
-    closeButtonAdd.addEventListener("click", () => super.close());
-    buttonElement.addEventListener("submit", () => this._getInputValues());
+    super.setEventListeners();
+    this._form.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+      this._submitHandler(this._getInputValues());
+      this.close();
+    });
   }
   close() {
+    this._form.reset();
     super.close();
-    popupImg.src = "";
   }
 }

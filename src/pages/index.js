@@ -1,8 +1,9 @@
 import FormValidator from "../../src/components/FormValidator.js";
-import Card from "../../src/components/card.js";
+import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const cardList = document.querySelector(".cards");
 
@@ -58,12 +59,21 @@ function handleProfileFormSubmit(evt) {
 }
 
 const popupWithImage = new PopupWithImage();
+popupWithImage.setEventListeners();
+closeButtonImg.addEventListener("click", () => popupWithImage.close());
 
 const section = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item.name, item.imageUrl, ".card-template");
+      const card = new Card(
+        item.name,
+        item.imageUrl,
+        ".card-template",
+        (imageUrl, name) => {
+          popupWithImage.open(imageUrl, name);
+        }
+      );
       const cardElement = card.generateCard();
       cardList.prepend(cardElement);
       return cardElement;
@@ -74,24 +84,32 @@ const section = new Section(
 
 section.renderItems(initialCards);
 
-// initialCards.forEach((item) => {
-//   section.renderItems(item);
-// });
+const formPopup = new PopupWithForm((values) => {
+  const inputName = document.querySelector(".name-input");
+  const inputRole = document.querySelector(".role-input");
 
-popupAdd.addEventListener("submit", function (evt) {
-  evt.preventDefault(popupAdd);
-  popupAdd.classList.remove("popup_add_show");
-  const titleInput = popupAdd.querySelector("input#title-input");
-  const imageUrlInput = popupAdd.querySelector("input#link-input");
+  const card = new Card(inputName.value, inputRole.value, ".card-template");
+  section.addItem(card);
+}, ".popup");
+
+formPopup.setEventListeners();
+editButton.addEventListener("click", () => formPopup.open());
+closeButton.addEventListener("click", () => formPopup.close());
+
+const formPopupAdd = new PopupWithForm((values) => {
+  const inputTitle = document.querySelector(".title-input");
+  const inputImageUrl = document.querySelector(".link-input");
 
   const card = {
-    name: titleInput.value,
-    imageUrl: imageUrlInput.value,
+    name: inputTitle.value,
+    imageUrl: inputImageUrl.value,
   };
-  section.addItem(item);
-  titleInput.value = "";
-  imageUrlInput.value = "";
-});
+  section.addItem(card);
+}, ".popup_add");
+
+formPopupAdd.setEventListeners();
+addButton.addEventListener("click", () => formPopupAdd.open());
+closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
 
 editButton.addEventListener("click", populateForm);
 popup.addEventListener("submit", handleProfileFormSubmit);
@@ -110,15 +128,10 @@ popup.addEventListener("submit", handleProfileFormSubmit);
 
 import {
   popup,
-  popupAdd,
-  popupImg,
   editButton,
   profile,
   addButton,
   closeButton,
   closeButtonAdd,
   closeButtonImg,
-  // handleOverlayClick,
-  keyHandler,
-  setEventListeners,
 } from "../../src/components/utils.js";

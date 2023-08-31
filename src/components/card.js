@@ -1,15 +1,14 @@
-import { popupImg } from "../../src/components/utils.js";
-
 export default class Card {
-  constructor(name, imageUrl, cardSelector) {
+  constructor(name, imageUrl, cardSelector, handleImageClick) {
     this._name = name;
     this._imageUrl = imageUrl;
     this._cardSelector = cardSelector;
+    this._handleImageClick = handleImageClick;
   }
 
   _getTemplate() {
     const cardElement = document
-      .querySelector(".card-template")
+      .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
 
@@ -45,17 +44,10 @@ export default class Card {
       this._element.remove();
     });
 
-    linkElement.addEventListener("click", this._handleImageClick);
+    linkElement.addEventListener("click", () => {
+      this._handleImageClick(this._imageUrl, this._name);
+    });
   }
-
-  // _handleImageClick(event) {
-  //   const popupImgElement = document.querySelector(".popup__link-image");
-  //   const popupImgLegend = document.querySelector(".popup__legend-image");
-  //   popupImgElement.src = event.target.src;
-  //   popupImgElement.alt = event.target.alt;
-  //   popupImgLegend.textContent = event.target.alt;
-  //   openPopupImage(popupImg);
-  // }
 }
 
 /*function createCard(card) {

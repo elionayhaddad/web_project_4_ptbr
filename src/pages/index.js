@@ -1,4 +1,4 @@
-import FormValidator from "../../src/components/FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
@@ -6,6 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
 const cardList = document.querySelector(".cards");
+const form = document.querySelectorAll(".popup__field-txt");
 
 const initialCards = [
   {
@@ -114,17 +115,18 @@ closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
 editButton.addEventListener("click", populateForm);
 popup.addEventListener("submit", handleProfileFormSubmit);
 
-// config({
-//   formSelector: ".popup__container",
-//   inputSelector: ".popup__field-txt",
-//   submitButtonSelector: ".button_submit",
-//   inactiveButtonClass: "button_inactive",
-//   inputErrorClass: "popup__input_type_error",
-//   errorClass: "popup__input-error_active",
-// });
+const config = {
+  formSelector: ".popup__field",
+  inputSelector: ".popup__field-txt",
+  errorSelector: ".popup__input-error",
+  submitButtonSelector: ".button_submit",
+  inactiveButtonClass: "button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active",
+};
 
-// const formValidator = new FormValidator(config, formElement);
-// formValidator.enableValidation();
+const formValidator = new FormValidator(config, form);
+formValidator.enableValidation();
 
 import {
   popup,

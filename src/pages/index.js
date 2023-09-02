@@ -100,7 +100,6 @@ closeButton.addEventListener("click", () => formPopup.close());
 const formPopupAdd = new PopupWithForm((values) => {
   const inputTitle = document.querySelector(".title-input");
   const inputImageUrl = document.querySelector(".link-input");
-
   const card = {
     name: inputTitle.value,
     imageUrl: inputImageUrl.value,
@@ -120,6 +119,7 @@ const config = {
   inputSelector: ".popup__field-txt",
   errorSelector: ".popup__input-error",
   submitButtonSelector: ".button_submit",
+  submitAddButtonSelector: ".button_submit_add",
   inactiveButtonClass: "button_inactive",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active",

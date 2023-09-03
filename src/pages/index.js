@@ -6,7 +6,8 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
 const cardList = document.querySelector(".cards");
-const form = document.querySelectorAll(".popup__field-txt");
+const form = document.querySelector(".popup__container");
+const formAdd = popupAdd.querySelector(".popup__container");
 
 const initialCards = [
   {
@@ -119,7 +120,6 @@ const config = {
   inputSelector: ".popup__field-txt",
   errorSelector: ".popup__input-error",
   submitButtonSelector: ".button_submit",
-  submitAddButtonSelector: ".button_submit_add",
   inactiveButtonClass: "button_inactive",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active",
@@ -127,9 +127,12 @@ const config = {
 
 const formValidator = new FormValidator(config, form);
 formValidator.enableValidation();
+const formAddValidation = new FormValidator(config, formAdd);
+formAddValidation.enableValidation();
 
 import {
   popup,
+  popupAdd,
   editButton,
   profile,
   addButton,

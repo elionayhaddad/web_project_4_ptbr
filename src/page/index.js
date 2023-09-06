@@ -1,12 +1,12 @@
-import "./pages/index.css";
-import headerLogo from "../images/header.svg";
-import headerLine from "../images/Line.svg";
-import btnAdd from "../images/more.svg";
-import btnEdit from "../images/button__edit.svg";
-import imgProfile from "../images/photo-elipse.png";
-import closeIconPopup from "../images/close-icon.png";
-import closeIconPopupAdd from "../images/close-icon.png";
-import closeIconPopupImg from "../images/close-icon.png";
+import "../page/index.css";
+import headerLogo from "../../images/header.svg";
+import headerLine from "../../images/Line.svg";
+import btnAdd from "../../images/more.svg";
+import btnEdit from "../../images/button__edit.svg";
+import imgProfile from "../../images/photo-elipse.png";
+import closeIconPopup from "../../images/close-icon.png";
+import closeIconPopupAdd from "../../images/close-icon.png";
+import closeIconPopupImg from "../../images/close-icon.png";
 import {
   initialCards,
   cardList,
@@ -17,13 +17,13 @@ import {
   closeButton,
   closeButtonAdd,
   closeButtonImg,
-} from "./components/utils.js";
-import UserInfo from "./components/UserInfo.js";
-import FormValidator from "./components/FormValidator.js";
-import Card from "./components/Card.js";
-import Section from "./components/Section.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import PopupWithForm from "./components/PopupWithForm.js";
+} from "../components/utils.js";
+import UserInfo from "../components/UserInfo.js";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const headLogo = document.getElementById("header-logo");
 headLogo.src = headerLogo;

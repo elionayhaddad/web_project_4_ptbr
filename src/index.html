@@ -5,46 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eua Afora</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body>
     <div class="page">
       <header class="header">
+        <img id="header-logo" class="header__logo" alt="logo do site" />
         <img
-          class="header__logo"
-          src="../images/header.svg"
-          alt="logo do site"
-        />
-        <img
+          id="header-line"
           class="header__line"
-          src="../images/Line.svg"
           alt="linha cinza marcando o fim do cabeçalho"
         />
       </header>
       <main class="content">
         <section class="profile">
           <img
+            id="img-profile"
             class="profile__image"
-            src="../images/photo-elipse.png"
             alt="foto de um idoso apreciando a paisagem"
           />
           <div class="profile__info">
             <div class="profile__info-edit">
               <h2 class="profile__artist">Jacques Cousteau</h2>
               <button class="button button_profile" type="submit">
-                <img
-                  class="button__profile-image"
-                  src="../images/button__edit.svg"
-                  alt="lápis"
-                />
+                <img id="btn-edit" class="button__profile-image" alt="lápis" />
               </button>
             </div>
             <p class="profile__text">Explorar</p>
           </div>
           <button class="button button_add" type="submit">
             <img
+              id="btn-add-card"
               class="button__add-image"
-              src="../images/more.svg"
               alt="sinal de adição"
             />
           </button>
@@ -53,16 +44,18 @@
           <template class="card-template">
             <div class="card">
               <img
+                id="remove-icon"
                 class="card__remove-icon"
-                src="../images/excluir-icon.png"
+                src="<%= require('../images/excluir-icon.png')%>"
                 alt="botão em forma de lixeira"
               />
               <img class="card__image" src=" " alt="" />
               <div class="card__description">
                 <h2 class="card__title"></h2>
                 <img
+                  id="button-icon"
+                  src="<%= require('../images/like.svg')%>"
                   class="card__like"
-                  src="../images/like.svg"
                   alt="um botão de reação em formato de coração."
                 />
               </div>
@@ -74,8 +67,8 @@
         <div class="popup__overflow" id="overflow"></div>
 
         <img
+          id="close-icon-popup"
           class="button button_close"
-          src="../images/close-icon.png"
           alt="botão fechar"
         />
         <form class="popup__container" name="register" novalidate>
@@ -112,11 +105,11 @@
       <div class="popup popup_add">
         <div class="popup__overflow" id="overflow-add"></div>
         <img
+          id="close-icon-add"
           class="button button_close"
-          src="../images/close-icon.png"
           alt="botão fechar"
         />
-        <form class="popup__container form-add" name="register" novalidate>
+        <form class="popup__container form" name="register" novalidate>
           <h3 class="popup__title">Novo local</h3>
           <fieldset class="popup__field">
             <input
@@ -152,8 +145,8 @@
         <div class="popup__overflow" id="overflow-image"></div>
         <div class="popup__container-image">
           <img
+            id="close-icon-image"
             class="button button_close button_close_image"
-            src="../images/close-icon.png"
             alt="botão fechar"
           />
           <img class="popup__link-image" src=" " alt="" />
@@ -164,6 +157,5 @@
         <h4 class="footer__copyright">&copy; 2021 Around The U.S.</h4>
       </footer>
     </div>
-    <script type="module" src="../src/pages/index.js"></script>
   </body>
 </html>

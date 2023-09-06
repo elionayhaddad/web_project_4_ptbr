@@ -49,33 +49,3 @@ export default class Card {
     });
   }
 }
-
-/*function createCard(card) {
-    const cardTemplate = cardList.querySelector(".card-template").content;
-    const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-    const titleElement = cardElement.querySelector(".card__title");
-    const linkElement = cardElement.querySelector(".card__image");
-    const removeButton = cardElement.querySelector(".card__remove-icon");
-  
-    cardElement
-      .querySelector(".card__like")
-      .addEventListener("click", function (evt) {
-        evt.target.classList.toggle("card__like_active");
-      });
-  
-    removeButton.addEventListener("click", function () {
-      card = removeButton.closest(".card");
-      card.remove();
-    });
-  
-    linkElement.addEventListener("click", handleImageClick);
-  
-    titleElement.textContent = card.name;
-    linkElement.src = card.imageUrl;
-    linkElement.alt = card.name;
-    cardList.prepend(cardElement);
-  }
-  
-  initialCards.forEach(function (card) {
-    createCard(card);
-  });*/

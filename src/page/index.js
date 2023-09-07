@@ -76,15 +76,17 @@ const config = {
 };
 
 const formValidator = new FormValidator(config, form);
-const formAddValidation = new FormValidator(config, formAdd);
 
 formValidator.enableValidation();
-formAddValidation.enableValidation();
 formPopup.setEventListeners();
 formPopupAdd.setEventListeners();
 popupWithImage.setEventListeners();
 
-addButton.addEventListener("click", () => formPopupAdd.open());
+addButton.addEventListener("click", () => {
+  formPopupAdd.open();
+  const formAddValidation = new FormValidator(config, formAdd);
+  formAddValidation.enableValidation();
+});
 closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
 editButton.addEventListener("click", () => {
   formPopup.open();

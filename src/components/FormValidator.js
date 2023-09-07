@@ -26,7 +26,7 @@ export default class FormValidator {
   }
 
   _hasInvalidInput(inputList) {
-    return inputList.some((form) => !form.validity.valid);
+    return inputList.some((inputElement) => !inputElement.validity.valid);
   }
 
   _toggleStateButton(buttonElement, inputList) {
@@ -48,8 +48,9 @@ export default class FormValidator {
       .closest(this._config.formSelector)
       .querySelector(this._config.errorSelector);
 
-    const inputList = this._form.querySelectorAll(this._config.inputSelector);
-    const inputArray = Array.from(inputList);
+    const inputArray = Array.from(
+      this._form.querySelectorAll(this._config.inputSelector)
+    );
 
     if (inputElement.validity.valid) {
       this._hideInputError(errorElement, inputElement);

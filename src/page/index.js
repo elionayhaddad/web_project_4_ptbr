@@ -1,4 +1,4 @@
-import "../page/index.css";
+import "./index.css";
 import {
   initialCards,
   cardList,

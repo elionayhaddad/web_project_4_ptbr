@@ -1,11 +1,9 @@
-const profile = document.querySelector(".profile");
-const popup = document.querySelector(".popup");
 const popupImg = document.querySelector(".popup_image");
 const popupAdd = document.querySelector(".popup_add");
-const editButton = profile.querySelector(".button_profile");
+const editButton = document.querySelector(".button_profile");
 const closeButtonImg = popupImg.querySelector(".button_close_image");
-const closeButton = popup.querySelector(".button_close");
-const addButton = profile.querySelector(".button_add");
+const closeButton = document.querySelector(".button_close");
+const addButton = document.querySelector(".button_add");
 const closeButtonAdd = popupAdd.querySelector(".button_close");
 const cardList = document.querySelector(".cards");
 const form = document.querySelector(".popup__container");
@@ -46,16 +44,12 @@ const initialCards = [
 
 export {
   initialCards,
-  popup,
   cardList,
   form,
   formAdd,
-  popupAdd,
-  popupImg,
   editButton,
   addButton,
   closeButton,
   closeButtonAdd,
   closeButtonImg,
-  profile,
 };

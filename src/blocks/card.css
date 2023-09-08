@@ -61,8 +61,7 @@
   opacity: 0.5;
 }
 .card__like_active {
-  /* outline: 1px solid red; */
-  background-image: url(../../images/like-icon.png);
+  background-image: url(../images/like-icon.png);
   width: 100%;
   max-width: 21.5px;
   height: 100%;

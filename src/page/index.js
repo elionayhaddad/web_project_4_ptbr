@@ -17,6 +17,25 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForms.js";
 
+import headerSrc from "../images/header.svg";
+import lineSrc from "../images/Line.svg";
+import artistSrc from "../images/photo-elipse.png";
+import editionSrc from "../images/button__edit.svg";
+import creationSrc from "../images/more.svg";
+
+const headerLogo = document.getElementById("header");
+const headerLine = document.getElementById("line");
+const profileArt = document.getElementById("artist");
+const editProf = document.getElementById("edition");
+const createCard = document.getElementById("create-card");
+const removeCard = document.getElementById("remove");
+
+headerLogo.src = headerSrc;
+headerLine.src = lineSrc;
+profileArt.src = artistSrc;
+editProf.src = editionSrc;
+createCard.src = creationSrc;
+
 const popupWithImage = new PopupWithImage();
 
 const section = new Section(

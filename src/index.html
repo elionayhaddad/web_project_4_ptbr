@@ -10,20 +10,23 @@
     <div class="page">
       <header class="header">
         <img
+          id="header"
           class="header__logo"
-          src="<%=require('../../images/header.svg)%>"
+          src=">%=require('../../images/Line.svg')%>"
           alt="logo do site"
         />
         <img
+          id="line"
           class="header__line"
-          src="<%=require('../../images/Line.svg')%>"
+          src=">%=require('../../images/Line.svg')%>"
           alt="linha cinza marcando o fim do cabeçalho"
         />
       </header>
       <main class="content">
         <section class="profile">
           <img
-            src="<%=require('../../images/photo-elipse.png')%>"
+            id="artist"
+            src=">%=require('../../images/photo-elipse.png')%>"
             class="profile__image"
             alt="foto de um idoso apreciando a paisagem"
           />
@@ -32,8 +35,9 @@
               <h2 class="profile__artist">Jacques Cousteau</h2>
               <button class="button button_profile" type="submit">
                 <img
+                  id="edition"
                   class="button__profile-image"
-                  src="<%=require('../../images/button__edit.svg')%>"
+                  src=">%=require('./images/button__edit.svg')%>"
                   alt="lápis"
                 />
               </button>
@@ -42,8 +46,9 @@
           </div>
           <button class="button button_add" type="submit">
             <img
+              id="create-card"
               class="button__add-image"
-              src="<%=require('../../images/more.svg')%>"
+              src="%=require('./images/more.svg')%>"
               alt="sinal de adição"
             />
           </button>
@@ -52,15 +57,16 @@
           <template class="card-template">
             <div class="card">
               <img
+                id="remove"
                 class="card__remove-icon"
-                src="<%=require('../../images/excluir-icon.png')%>"
+                src="<%=require('./images/excluir-icon.png')%>"
                 alt="botão em forma de lixeira"
               />
               <img class="card__image" src=" " alt="" />
               <div class="card__description">
                 <h2 class="card__title"></h2>
                 <img
-                  src="<%=require('../../images/like.svg')%>"
+                  src="<%=require('./images/like.svg')%>"
                   class="card__like"
                   alt="um botão de reação em formato de coração."
                 />
@@ -73,7 +79,7 @@
         <div class="popup__overflow" id="overflow"></div>
         <img
           class="button button_close"
-          src="<%=require('../../images/close-icon.png')%>"
+          src="<%=require('./images/close-icon.png')%>"
           alt="botão fechar"
         />
         <form class="popup__container" name="register" novalidate>
@@ -111,7 +117,7 @@
         <div class="popup__overflow" id="overflow-add"></div>
         <img
           class="button button_close"
-          src="<%=require('../../images/close-icon.png')%>"
+          src="<%=require('./images/close-icon.png')%>"
           alt="botão fechar"
         />
         <form class="popup__container form" name="register" novalidate>
@@ -151,7 +157,7 @@
         <div class="popup__container-image">
           <img
             class="button button_close button_close_image"
-            src="<%=require('../../images/close-icon.png')%>"
+            src="<%=require('./images/close-icon.png')%>"
             alt="botão fechar"
           />
           <img class="popup__link-image" src=" " alt="" />

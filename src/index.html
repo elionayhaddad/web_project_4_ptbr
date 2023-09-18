@@ -12,13 +12,13 @@
         <img
           id="header"
           class="header__logo"
-          src=">%=require('../../images/Line.svg')%>"
+          src="<%=require('./images/Line.svg')%>"
           alt="logo do site"
         />
         <img
           id="line"
           class="header__line"
-          src=">%=require('../../images/Line.svg')%>"
+          src="<%=require('./images/Line.svg')%>"
           alt="linha cinza marcando o fim do cabeçalho"
         />
       </header>
@@ -26,7 +26,7 @@
         <section class="profile">
           <img
             id="artist"
-            src=">%=require('../../images/photo-elipse.png')%>"
+            src="<%=require('./images/photo-elipse.png')%>"
             class="profile__image"
             alt="foto de um idoso apreciando a paisagem"
           />
@@ -37,7 +37,7 @@
                 <img
                   id="edition"
                   class="button__profile-image"
-                  src=">%=require('./images/button__edit.svg')%>"
+                  src="<%=require('./images/button__edit.svg')%>"
                   alt="lápis"
                 />
               </button>
@@ -48,7 +48,7 @@
             <img
               id="create-card"
               class="button__add-image"
-              src="%=require('./images/more.svg')%>"
+              src="<%=require('./images/more.svg')%>"
               alt="sinal de adição"
             />
           </button>
@@ -65,11 +65,14 @@
               <img class="card__image" src=" " alt="" />
               <div class="card__description">
                 <h2 class="card__title"></h2>
-                <img
-                  src="<%=require('./images/like.svg')%>"
-                  class="card__like"
-                  alt="um botão de reação em formato de coração."
-                />
+                <div class="card__like-container">
+                  <img
+                    src="<%=require('./images/like.svg')%>"
+                    class="card__like"
+                    alt="um botão de reação em formato de coração."
+                  />
+                  <p class="card__counter">0</p>
+                </div>
               </div>
             </div>
           </template>
@@ -165,7 +168,7 @@
         </div>
       </div>
       <footer class="footer">
-        <h4 class="footer__copyright">&copy; 2021 Around The U.S.</h4>
+        <h4 class="footer__copyright">&copy; 2023 Around The U.S.</h4>
       </footer>
     </div>
   </body>

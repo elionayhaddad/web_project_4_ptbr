@@ -42,6 +42,16 @@ const initialCards = [
   },
 ];
 
+const config = {
+  formSelector: ".popup__field",
+  inputSelector: ".popup__field-txt",
+  errorSelector: ".popup__input-error",
+  submitButtonSelector: ".button_submit",
+  inactiveButtonClass: "button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active",
+};
+
 export {
   initialCards,
   cardList,
@@ -52,4 +62,5 @@ export {
   closeButton,
   closeButtonAdd,
   closeButtonImg,
+  config,
 };

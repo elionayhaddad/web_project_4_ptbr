@@ -32,12 +32,13 @@ export default class Card {
   _setEventListener() {
     const removeButton = this._element.querySelector(".card__remove-icon");
     const linkElement = this._element.querySelector(".card__image");
+    const likeButtonElement = this._element.querySelector(".card__like");
+    const countElement = this._element.querySelector(".contador");
 
-    this._element
-      .querySelector(".card__like")
-      .addEventListener("click", function (evt) {
-        evt.target.classList.toggle("card__like_active");
-      });
+    likeButtonElement.addEventListener("click", function (evt) {
+      evt.target.classList.toggle("card__like_active");
+      console.log(setInterval((i) => i++, 10000));
+    });
 
     removeButton.addEventListener("click", () => {
       this._element = removeButton.closest(".card");

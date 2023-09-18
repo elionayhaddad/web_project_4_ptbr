@@ -46,9 +46,9 @@
   background-color: unset;
   max-width: 40px;
   max-height: 40px;
-  position: fixed;
-  top: 19%;
-  right: 30.5%;
+  position: absolute;
+  top: 15%;
+  left: 67%;
   z-index: 4;
 }
 .button_close:hover {
@@ -125,8 +125,13 @@
     max-width: 26px;
     height: 100%;
     max-height: 26px;
-    top: 72.62px;
-    right: 18.62px;
+    position: absolute;
+    top: 18%;
+    right: 30%;
+  }
+  .button_close_image {
+    position: absolute;
+    top: 2%;
   }
   .button_submit {
     width: 85%;

@@ -71,7 +71,7 @@
                     class="card__like"
                     alt="um botão de reação em formato de coração."
                   />
-                  <p class="card__counter">0</p>
+                  <p class="card__counter"></p>
                 </div>
               </div>
             </div>
@@ -166,6 +166,20 @@
           <img class="popup__link-image" src=" " alt="" />
           <p class="popup__legend-image"></p>
         </div>
+      </div>
+      <div class="popup popup_remove">
+        <div class="popup__overflow" id="overflow-add"></div>
+        <img
+          class="button button_close button_close_image"
+          src="<%=require('./images/close-icon.png')%>"
+          alt="botão fechar"
+        />
+        <form class="popup__container form" name="register" novalidate>
+          <h3 class="popup__title">Tem certeza?</h3>
+          <button class="button button_submit button_submit_add" type="submit">
+            Sim
+          </button>
+        </form>
       </div>
       <footer class="footer">
         <h4 class="footer__copyright">&copy; 2023 Around The U.S.</h4>

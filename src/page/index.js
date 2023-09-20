@@ -10,11 +10,14 @@ import {
   closeButtonAdd,
   closeButtonImg,
   config,
+  removeButton,
+  popupRemove,
 } from "../components/utils.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
@@ -44,6 +47,14 @@ const api = new Api({
     "Content-type": "application/json",
   },
 });
+api
+  .getUserInfo({
+    avatar: document.querySelector(".profile__image").src,
+    name: document.querySelector(".profile__artist").textContent,
+    role: document.querySelector(".profile__text").textContent,
+    _id: api.headers.authorization,
+  })
+  .then();
 
 api.getCards().then(() => {
   const section = new Section(
@@ -58,6 +69,7 @@ api.getCards().then(() => {
             popupWithImage.open(imageUrl, name);
           }
         );
+        // api.addLikeCards(card._id).then();
         const cardElement = card.generateCard();
         cardList.prepend(cardElement);
         return cardElement;
@@ -76,7 +88,9 @@ const formPopup = new PopupWithForm(() => {
     roleSelector: ".profile__text",
   });
   const newUser = user.setUserInfo();
-  return newUser;
+  api.editProfile(user._nameInput.value, user._roleInput.value).then(() => {
+    return newUser;
+  });
 }, ".popup");
 
 const formPopupAdd = new PopupWithForm(() => {
@@ -91,13 +105,18 @@ const formPopupAdd = new PopupWithForm(() => {
     }
   );
   api
-    .createCards({ name: inputTitle.value, link: inputImageUrl.value })
+    .createCards({
+      name: inputTitle.value,
+      link: inputImageUrl.value,
+    })
     .then(() => {
       const cardElement = card.generateCard();
       cardList.prepend(cardElement);
       return cardElement;
     });
 }, ".popup_add");
+
+// const popupRemoveCard = new Popup(".popup_remove");
 
 const formValidator = new FormValidator(config, form);
 const formAddValidation = new FormValidator(config, formAdd);
@@ -107,7 +126,9 @@ formValidator.enableValidation();
 formPopup.setEventListeners();
 formPopupAdd.setEventListeners();
 popupWithImage.setEventListeners();
+// popupRemoveCard.setEventListeners();
 
+// removeButton.addEventListener("click", () => popupRemoveCard.open());
 addButton.addEventListener("click", () => formPopupAdd.open());
 closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
 editButton.addEventListener("click", () => {

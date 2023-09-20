@@ -8,6 +8,8 @@ const closeButtonAdd = popupAdd.querySelector(".button_close");
 const cardList = document.querySelector(".cards");
 const form = document.querySelector(".popup__container");
 const formAdd = popupAdd.querySelector(".popup__container");
+const popupRemove = document.querySelector("popup_remove");
+const removeButton = document.querySelector(".card__remove-icon");
 
 const initialCards = [
   {
@@ -63,4 +65,6 @@ export {
   closeButtonAdd,
   closeButtonImg,
   config,
+  removeButton,
+  popupRemove,
 };

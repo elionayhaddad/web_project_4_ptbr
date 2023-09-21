@@ -70,12 +70,13 @@ api.getCards().then(() => {
           },
           (isLiked, cardId) => {
             if (isLiked) {
-              return api.removeLikeCards(cardId).then();
+              return api.removeLikeCards(cardId);
             } else {
-              return api.addLikeCards(cardId).then();
+              return api.addLikeCards(cardId);
             }
           }
         );
+        console.log(card._id);
         const cardElement = card.generateCard();
         cardList.prepend(cardElement);
         return cardElement;

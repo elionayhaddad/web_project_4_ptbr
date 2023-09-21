@@ -11,7 +11,6 @@ import {
   closeButtonImg,
   config,
   removeButton,
-  popupRemove,
 } from "../components/utils.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
@@ -56,6 +55,8 @@ api
   })
   .then();
 
+const popupRemove = new Popup(".popup_remove");
+
 api.getCards().then(() => {
   const section = new Section(
     {
@@ -67,9 +68,15 @@ api.getCards().then(() => {
           ".card-template",
           (imageUrl, name) => {
             popupWithImage.open(imageUrl, name);
+          },
+          (isLiked, cardId) => {
+            if (isLiked) {
+              return api.removeLikeCards(cardId).then();
+            } else {
+              return api.addLikeCards(cardId).then();
+            }
           }
         );
-        // api.addLikeCards(card._id).then();
         const cardElement = card.generateCard();
         cardList.prepend(cardElement);
         return cardElement;
@@ -102,6 +109,13 @@ const formPopupAdd = new PopupWithForm(() => {
     ".card-template",
     (imageUrl, name) => {
       popupWithImage.open(imageUrl, name);
+    },
+    (isLiked, cardId) => {
+      if (isLiked) {
+        return api.removeLikeCards(cardId).then();
+      } else {
+        return api.addLikeCards(cardId);
+      }
     }
   );
   api
@@ -116,19 +130,13 @@ const formPopupAdd = new PopupWithForm(() => {
     });
 }, ".popup_add");
 
-// const popupRemoveCard = new Popup(".popup_remove");
-
 const formValidator = new FormValidator(config, form);
 const formAddValidation = new FormValidator(config, formAdd);
 formAddValidation.enableValidation();
-
 formValidator.enableValidation();
 formPopup.setEventListeners();
 formPopupAdd.setEventListeners();
 popupWithImage.setEventListeners();
-// popupRemoveCard.setEventListeners();
-
-// removeButton.addEventListener("click", () => popupRemoveCard.open());
 addButton.addEventListener("click", () => formPopupAdd.open());
 closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
 editButton.addEventListener("click", () => {

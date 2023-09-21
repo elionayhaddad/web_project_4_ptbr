@@ -1,9 +1,10 @@
 export default class Card {
-  constructor(name, imageUrl, cardSelector, handleImageClick) {
+  constructor(name, imageUrl, cardSelector, handleImageClick, handleLikeClick) {
     this._name = name;
     this._imageUrl = imageUrl;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
@@ -35,7 +36,9 @@ export default class Card {
     const likeButtonElement = this._element.querySelector(".card__like");
 
     likeButtonElement.addEventListener("click", function (evt) {
-      evt.target.classList.toggle("card__like_active");
+      this._handleLikeClick().then(() => {
+        evt.target.classList.toggle("card__like_active");
+      });
     });
 
     removeButton.addEventListener("click", () => {

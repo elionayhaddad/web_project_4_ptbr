@@ -12,6 +12,10 @@
   width: 120px;
   height: 120px;
 }
+.profile__image:hover {
+  background: url(../images/avatar-hover.jpg);
+  border-radius: 60px;
+}
 .profile__info {
   margin: 0 10px;
   width: 415px;

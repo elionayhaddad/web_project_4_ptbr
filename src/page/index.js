@@ -10,7 +10,6 @@ import {
   closeButtonAdd,
   closeButtonImg,
   config,
-  removeButton,
 } from "../components/utils.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";

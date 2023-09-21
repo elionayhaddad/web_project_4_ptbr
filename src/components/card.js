@@ -6,7 +6,6 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleLikeClick = handleLikeClick;
   }
-
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -34,7 +33,7 @@ export default class Card {
     const removeButton = this._element.querySelector(".card__remove-icon");
     const linkElement = this._element.querySelector(".card__image");
     const likeButtonElement = this._element.querySelector(".card__like");
-
+    console.log(this._handleLikeClick);
     likeButtonElement.addEventListener("click", function (evt) {
       this._handleLikeClick().then(() => {
         evt.target.classList.toggle("card__like_active");

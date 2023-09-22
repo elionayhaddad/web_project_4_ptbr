@@ -11,39 +11,6 @@ const formAdd = popupAdd.querySelector(".popup__container");
 const popupRemove = document.querySelector("popup_remove");
 const removeButton = document.querySelector(".card__remove-icon");
 
-const initialCards = [
-  {
-    name: "Vale de Yosemite",
-    imageUrl:
-      "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    imageUrl:
-      "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-  },
-  {
-    name: "Montanhas Carecas",
-    imageUrl:
-      "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    imageUrl:
-      "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
-  },
-  {
-    name: "Parque Nacional da Vanoise ",
-    imageUrl:
-      "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    imageUrl:
-      "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
-  },
-];
-
 const config = {
   formSelector: ".popup__field",
   inputSelector: ".popup__field-txt",
@@ -55,7 +22,6 @@ const config = {
 };
 
 export {
-  initialCards,
   cardList,
   form,
   formAdd,

@@ -1,20 +1,12 @@
 export default class Card {
-  constructor(
-    name,
-    imageUrl,
-    cardSelector,
-    handleImageClick,
-    cardId,
-    handleLikeClick,
-    isLiked
-  ) {
-    this._name = name;
-    this._imageUrl = imageUrl;
-    this._cardSelector = cardSelector;
-    this._handleImageClick = handleImageClick;
-    this._cardId = cardId;
-    this._handleLikeClick = handleLikeClick;
-    this._isLiked = isLiked;
+  constructor(cardData, config) {
+    this._name = cardData.name;
+    this._imageUrl = cardData.imageUrl;
+    this._cardId = cardData.cardId;
+    this._cardSelector = config.cardSelector;
+    this._handleImageClick = config.handleImageClick;
+    this._handleLikeClick = config.handleLikeClick;
+    this._isLiked = config.isLiked;
   }
   _getTemplate() {
     const cardElement = document
@@ -43,10 +35,10 @@ export default class Card {
     const removeButton = this._element.querySelector(".card__remove-icon");
     const linkElement = this._element.querySelector(".card__image");
     const likeButtonElement = this._element.querySelector(".card__like");
-    console.log(this._handleLikeClick);
+    console.log(this._isLiked);
     likeButtonElement.addEventListener("click", function (evt) {
       this._handleLikeClick(this._isLiked, this._cardId).then(() => {
-        evt.target.classList.toggle("card__like_active");
+        return evt.target.classList.toggle("card__like_active");
       });
     });
 

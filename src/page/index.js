@@ -1,6 +1,5 @@
 import "./index.css";
 import {
-  initialCards,
   cardList,
   form,
   formAdd,
@@ -56,27 +55,28 @@ api
 
 const popupRemove = new Popup(".popup_remove");
 
-api.getCards().then(() => {
+api.getCards().then((initialCards) => {
   const section = new Section(
     {
       items: initialCards,
       renderer: (item) => {
         const card = new Card(
-          item.name,
-          item.imageUrl,
-          ".card-template",
-          (imageUrl, name) => {
-            popupWithImage.open(imageUrl, name);
-          },
-          (isLiked, cardId) => {
-            if (isLiked) {
-              return api.removeLikeCards(cardId);
-            } else {
-              return api.addLikeCards(cardId);
-            }
+          { name: item.name, imageUrl: item.imageUrl, cardId: item._id },
+          {
+            cardSelector: ".card-template",
+            handleImageClick: (imageUrl, name) => {
+              popupWithImage.open(imageUrl, name);
+            },
+            handleLikeClick: (isLiked, cardId) => {
+              if (isLiked) {
+                return api.removeLikeCards(cardId);
+              } else {
+                return api.addLikeCards(cardId);
+              }
+            },
+            isLiked: [],
           }
         );
-        console.log(card._id);
         const cardElement = card.generateCard();
         cardList.prepend(cardElement);
         return cardElement;
@@ -100,28 +100,31 @@ const formPopup = new PopupWithForm(() => {
   });
 }, ".popup");
 
-const formPopupAdd = new PopupWithForm(() => {
+const formPopupAdd = new PopupWithForm((item) => {
   const inputTitle = document.querySelector(".title-input");
   const inputImageUrl = document.querySelector(".link-input");
   const card = new Card(
-    inputTitle.value,
-    inputImageUrl.value,
-    ".card-template",
-    (imageUrl, name) => {
-      popupWithImage.open(imageUrl, name);
-    },
-    (isLiked, cardId) => {
-      if (isLiked) {
-        return api.removeLikeCards(cardId).then();
-      } else {
-        return api.addLikeCards(cardId);
-      }
+    { name: inputTitle.value, imageUrl: inputImageUrl.value, cardId: item._id },
+    {
+      cardSelector: ".card-template",
+      handleImageClick: (imageUrl, name) => {
+        popupWithImage.open(imageUrl, name);
+      },
+      handleLikeClick: (isLiked, cardId) => {
+        if (isLiked) {
+          return api.removeLikeCards(cardId);
+        } else {
+          return api.addLikeCards(cardId);
+        }
+      },
+      isLiked: [],
     }
   );
   api
     .createCards({
       name: inputTitle.value,
       link: inputImageUrl.value,
+      cardId: item._id,
     })
     .then(() => {
       const cardElement = card.generateCard();

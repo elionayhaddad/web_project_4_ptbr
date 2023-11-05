@@ -5,11 +5,13 @@ const closeButtonImg = popupImg.querySelector(".button_close_image");
 const closeButton = document.querySelector(".button_close");
 const addButton = document.querySelector(".button_add");
 const closeButtonAdd = popupAdd.querySelector(".button_close");
+const closeButtonRemove = document.querySelector("img#close-remove");
 const cardList = document.querySelector(".cards");
 const form = document.querySelector(".popup__container");
 const formAdd = popupAdd.querySelector(".popup__container");
-const popupRemove = document.querySelector("popup_remove");
+const popupRemove = document.querySelector(".popup_remove");
 const removeButton = document.querySelector(".card__remove-icon");
+const btnSubmitConfirm = popupRemove.querySelector(".button_submit_confirm");
 
 const config = {
   formSelector: ".popup__field",
@@ -25,11 +27,13 @@ export {
   cardList,
   form,
   formAdd,
+  btnSubmitConfirm,
   editButton,
   addButton,
   closeButton,
   closeButtonAdd,
   closeButtonImg,
+  closeButtonRemove,
   config,
   removeButton,
   popupRemove,

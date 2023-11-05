@@ -9,6 +9,9 @@
   border-radius: 10px;
   overflow: hidden;
 }
+.card__remove-icon_hidden {
+  visibility: hidden;
+}
 .card__remove-icon {
   cursor: pointer;
   position: absolute;

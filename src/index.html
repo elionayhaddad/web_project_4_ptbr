@@ -55,13 +55,14 @@
         </section>
         <section class="cards">
           <template class="card-template">
-            <div class="card">
-              <img
-                id="remove"
-                class="card__remove-icon"
-                src="<%=require('./images/excluir-icon.png')%>"
-                alt="botão em forma de lixeira"
-              />
+            <div class="card" id="card">
+              <div class="card__remove">
+                <img
+                  class="card__remove-icon"
+                  src="<%=require('./images/excluir-icon.png')%>"
+                  alt="botão em forma de lixeira"
+                />
+              </div>
               <img class="card__image" src=" " alt="" />
               <div class="card__description">
                 <h2 class="card__title"></h2>
@@ -71,7 +72,7 @@
                     class="card__like"
                     alt="um botão de reação em formato de coração."
                   />
-                  <p class="card__counter"></p>
+                  <span class="card__counter"></span>
                 </div>
               </div>
             </div>
@@ -170,13 +171,17 @@
       <div class="popup popup_remove">
         <div class="popup__overflow"></div>
         <img
-          class="button button_close button_close_image"
+          class="button button_close button_close_remove"
+          id="close-remove"
           src="<%=require('./images/close-icon.png')%>"
           alt="botão fechar"
         />
-        <form class="popup__container form" name="register" novalidate>
-          <h3 class="popup__title">Tem certeza?</h3>
-          <button class="button button_submit button_submit_add" type="submit">
+        <form class="popup__container-confirm" name="register" novalidate>
+          <h3 class="popup__title popup__title_question">Tem certeza?</h3>
+          <button
+            class="button button_submit button_submit_confirm"
+            type="submit"
+          >
             Sim
           </button>
         </form>

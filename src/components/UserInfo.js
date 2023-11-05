@@ -8,7 +8,7 @@ export default class UserInfo {
   getUserInfo() {
     const nameUser = document.querySelector(this._name);
     const roleUser = document.querySelector(this._role);
-
+ 
     this._nameInput.value = nameUser.textContent;
     this._roleInput.value = roleUser.textContent;
   }

@@ -60,6 +60,19 @@ export default class Api {
     });
   }
 
+  deleteCards(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this.headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject();
+    });
+  }
+
   addLikeCards(cardId) {
     return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
@@ -84,6 +97,7 @@ export default class Api {
       return Promise.reject();
     });
   }
+
   updateImageUser() {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",

@@ -1,10 +1,15 @@
+import { removeButton } from "./utils";
+
 export default class Card {
   constructor(cardData, config) {
     this._name = cardData.name;
     this._imageUrl = cardData.imageUrl;
     this._cardId = cardData.cardId;
+    this._likes = cardData.likes;
+    this._ownerId = cardData.ownerId;
     this._cardSelector = config.cardSelector;
     this._handleImageClick = config.handleImageClick;
+    this._handleDeleteClick = config.handleDeleteClick;
     this._handleLikeClick = config.handleLikeClick;
     this._isLiked = config.isLiked;
   }
@@ -17,17 +22,24 @@ export default class Card {
     return cardElement;
   }
 
-  generateCard() {
+  generateCard(myId) {
     this._element = this._getTemplate();
     this._setEventListener();
-
     const titleElement = this._element.querySelector(".card__title");
     const linkElement = this._element.querySelector(".card__image");
+    const likeCount = this._element.querySelector(".card__counter");
+    const removeButton = this._element.querySelector(".card__remove-icon");
+
+    if (this._ownerId !== myId) {
+      removeButton.classList.add("card__remove-icon_hidden");
+    } else {
+      removeButton.classList.remove("card__remove-icon_hidden");
+    }
 
     titleElement.textContent = this._name;
     linkElement.src = this._imageUrl;
     linkElement.alt = this._name;
-
+    likeCount.innerHTML = this._likes.length;
     return this._element;
   }
 
@@ -35,16 +47,15 @@ export default class Card {
     const removeButton = this._element.querySelector(".card__remove-icon");
     const linkElement = this._element.querySelector(".card__image");
     const likeButtonElement = this._element.querySelector(".card__like");
-    console.log(this._isLiked);
-    likeButtonElement.addEventListener("click", function (evt) {
+
+    likeButtonElement.addEventListener("click", (evt) => {
       this._handleLikeClick(this._isLiked, this._cardId).then(() => {
-        return evt.target.classList.toggle("card__like_active");
+        evt.target.classList.toggle("card__like_active");
       });
     });
 
     removeButton.addEventListener("click", () => {
-      this._element = removeButton.closest(".card");
-      this._element.remove();
+      this._handleDeleteClick(this._cardId);
     });
 
     linkElement.addEventListener("click", () => {

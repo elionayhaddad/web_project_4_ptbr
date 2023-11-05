@@ -8,13 +8,15 @@ import {
   closeButton,
   closeButtonAdd,
   closeButtonImg,
+  removeButton,
   config,
+  closeButtonRemove,
+  btnSubmitConfirm,
 } from "../components/utils.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
-import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
@@ -24,6 +26,7 @@ import artistSrc from "../images/photo-elipse.png";
 import editionSrc from "../images/button__edit.svg";
 import creationSrc from "../images/more.svg";
 import Api from "../components/Api.js";
+import PopupWithConfirm from "../components/PopupWithConfirm";
 
 const headerLogo = document.getElementById("header");
 const headerLine = document.getElementById("line");
@@ -53,7 +56,12 @@ api
   })
   .then();
 
-const popupRemove = new Popup(".popup_remove");
+const formConfirm = new PopupWithConfirm(".popup_remove", (elementId) => {
+  api.deleteCards(elementId).then(() => {
+    const card = document.getElementById("card");
+    card.remove();
+  });
+});
 
 api.getCards().then((initialCards) => {
   const section = new Section(
@@ -61,11 +69,21 @@ api.getCards().then((initialCards) => {
       items: initialCards,
       renderer: (item) => {
         const card = new Card(
-          { name: item.name, imageUrl: item.imageUrl, cardId: item._id },
+          {
+            name: item.name,
+            imageUrl: item.link,
+            cardId: item._id,
+            likes: item.likes,
+            ownerId: item.owner._id,
+          },
           {
             cardSelector: ".card-template",
             handleImageClick: (imageUrl, name) => {
               popupWithImage.open(imageUrl, name);
+            },
+            handleDeleteClick: (cardId) => {
+              formConfirm.open();
+              formConfirm.getIdCard(cardId);
             },
             handleLikeClick: (isLiked, cardId) => {
               if (isLiked) {
@@ -77,7 +95,8 @@ api.getCards().then((initialCards) => {
             isLiked: [],
           }
         );
-        const cardElement = card.generateCard();
+        const cardElement = card.generateCard(api.getUserInfo(card.ownerId));
+        console.log(api.getUserInfo(card._handleImageClickownerId));
         cardList.prepend(cardElement);
         return cardElement;
       },
@@ -104,11 +123,21 @@ const formPopupAdd = new PopupWithForm((item) => {
   const inputTitle = document.querySelector(".title-input");
   const inputImageUrl = document.querySelector(".link-input");
   const card = new Card(
-    { name: inputTitle.value, imageUrl: inputImageUrl.value, cardId: item._id },
+    {
+      name: inputTitle.value,
+      imageUrl: inputImageUrl.value,
+      cardId: item._id,
+      owner: api.getUserInfo,
+      likes: [],
+    },
     {
       cardSelector: ".card-template",
       handleImageClick: (imageUrl, name) => {
         popupWithImage.open(imageUrl, name);
+      },
+      handleDeleteClick: (cardId) => {
+        formConfirm.open();
+        formConfirm.getIdCard(cardId);
       },
       handleLikeClick: (isLiked, cardId) => {
         if (isLiked) {
@@ -127,7 +156,8 @@ const formPopupAdd = new PopupWithForm((item) => {
       cardId: item._id,
     })
     .then(() => {
-      const cardElement = card.generateCard();
+      console.log(card.owner);
+      const cardElement = card.generateCard(api.getUserInfo.user);
       cardList.prepend(cardElement);
       return cardElement;
     });
@@ -137,9 +167,12 @@ const formValidator = new FormValidator(config, form);
 const formAddValidation = new FormValidator(config, formAdd);
 formAddValidation.enableValidation();
 formValidator.enableValidation();
+
 formPopup.setEventListeners();
 formPopupAdd.setEventListeners();
 popupWithImage.setEventListeners();
+formConfirm.setEventListeners();
+
 addButton.addEventListener("click", () => formPopupAdd.open());
 closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
 editButton.addEventListener("click", () => {
@@ -154,4 +187,5 @@ editButton.addEventListener("click", () => {
   return populateForm.getUserInfo();
 });
 closeButtonImg.addEventListener("click", () => popupWithImage.close());
+closeButtonRemove.addEventListener("click", () => formConfirm.close());
 closeButton.addEventListener("click", () => formPopup.close());

@@ -61,6 +61,13 @@
   left: 102%;
   z-index: 4;
 }
+.button_close_remove {
+  background-color: unset;
+  position: absolute;
+  top: 30%;
+  right: 15%;
+  z-index: 4;
+}
 .button_submit {
   width: 82%;
   max-width: 358px;
@@ -128,6 +135,11 @@
     position: absolute;
     top: 18%;
     right: 30%;
+  }
+  .button_close_remove {
+    top: 28%;
+    right: 15%;
+    z-index: 4;
   }
   .button_close_image {
     position: absolute;

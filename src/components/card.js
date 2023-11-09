@@ -1,4 +1,4 @@
-import { removeButton } from "./utils";
+import { popupRemove } from "./utils.js";
 
 export default class Card {
   constructor(cardData, config) {
@@ -9,6 +9,7 @@ export default class Card {
     this._ownerId = cardData.ownerId;
     this._cardSelector = config.cardSelector;
     this._handleImageClick = config.handleImageClick;
+    this._checkId = config.checkId;
     this._handleDeleteClick = config.handleDeleteClick;
     this._handleLikeClick = config.handleLikeClick;
     this._isLiked = config.isLiked;
@@ -22,7 +23,7 @@ export default class Card {
     return cardElement;
   }
 
-  generateCard(myId) {
+  generateCard() {
     this._element = this._getTemplate();
     this._setEventListener();
     const titleElement = this._element.querySelector(".card__title");
@@ -30,11 +31,7 @@ export default class Card {
     const likeCount = this._element.querySelector(".card__counter");
     const removeButton = this._element.querySelector(".card__remove-icon");
 
-    if (this._ownerId !== myId) {
-      removeButton.classList.add("card__remove-icon_hidden");
-    } else {
-      removeButton.classList.remove("card__remove-icon_hidden");
-    }
+    this._checkId(this._ownerId, removeButton);
 
     titleElement.textContent = this._name;
     linkElement.src = this._imageUrl;
@@ -53,9 +50,8 @@ export default class Card {
         evt.target.classList.toggle("card__like_active");
       });
     });
-
     removeButton.addEventListener("click", () => {
-      this._handleDeleteClick(this._cardId);
+      this._handleDeleteClick();
     });
 
     linkElement.addEventListener("click", () => {

@@ -11,7 +11,7 @@ export default class Api {
       user,
     }).then((res) => {
       if (res.ok) {
-        return res.json();
+        return res.json(user);
       }
       return Promise.reject();
     });
@@ -98,13 +98,13 @@ export default class Api {
     });
   }
 
-  updateImageUser() {
-    return fetch(`${this.baseUrl}/users/me/avatar`, {
+  updateImageUser(avatar) {
+    return fetch(`${this.baseUrl}/users/me/${avatar}`, {
       method: "PATCH",
       headers: this.headers,
     }).then((res) => {
       if (res.ok) {
-        return res.json();
+        return res.json(avatar);
       }
 
       return Promise.reject();

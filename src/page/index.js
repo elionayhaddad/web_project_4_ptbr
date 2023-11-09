@@ -36,9 +36,9 @@ const createCard = document.getElementById("create-card");
 
 headerLogo.src = headerSrc;
 headerLine.src = lineSrc;
-profileArt.src = artistSrc;
 editProf.src = editionSrc;
 createCard.src = creationSrc;
+profileArt.src = artistSrc;
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_04",
@@ -47,21 +47,20 @@ const api = new Api({
     "Content-type": "application/json",
   },
 });
+
 api
   .getUserInfo({
     avatar: document.querySelector(".profile__image").src,
     name: document.querySelector(".profile__artist").textContent,
     role: document.querySelector(".profile__text").textContent,
-    _id: api.headers.authorization,
+    _id: [],
   })
   .then();
 
-const formConfirm = new PopupWithConfirm(".popup_remove", (elementId) => {
-  api.deleteCards(elementId).then(() => {
-    const card = document.getElementById("card");
-    card.remove();
-  });
-});
+function deleteCards(id) {
+  api.deleteCards(id).then();
+}
+const formConfirm = new PopupWithConfirm(".popup_remove", deleteCards);
 
 api.getCards().then((initialCards) => {
   const section = new Section(
@@ -81,9 +80,23 @@ api.getCards().then((initialCards) => {
             handleImageClick: (imageUrl, name) => {
               popupWithImage.open(imageUrl, name);
             },
+            checkId: (ownerId, buttonElement) => {
+              api.getUserInfo().then((item) => {
+                const userId = item._id;
+                const checkId = ownerId === userId;
+                if (!checkId) {
+                  buttonElement.classList.add("card__remove-icon_hidden");
+                } else {
+                  buttonElement.classList.remove("card__remove-icon_hidden");
+                }
+              });
+            },
             handleDeleteClick: (cardId) => {
               formConfirm.open();
               formConfirm.getIdCard(cardId);
+            },
+            submitDelete: (id) => {
+              api.deleteCards(id).then();
             },
             handleLikeClick: (isLiked, cardId) => {
               if (isLiked) {
@@ -95,8 +108,7 @@ api.getCards().then((initialCards) => {
             isLiked: [],
           }
         );
-        const cardElement = card.generateCard(api.getUserInfo(card.ownerId));
-        console.log(api.getUserInfo(card._handleImageClickownerId));
+        const cardElement = card.generateCard();
         cardList.prepend(cardElement);
         return cardElement;
       },
@@ -135,6 +147,15 @@ const formPopupAdd = new PopupWithForm((item) => {
       handleImageClick: (imageUrl, name) => {
         popupWithImage.open(imageUrl, name);
       },
+      checkId: (ownerId, buttonElement) => {
+        api.getUserInfo().then((item) => {
+          const userId = item._id;
+          const checkId = ownerId === userId;
+          if (checkId) {
+            return buttonElement;
+          }
+        });
+      },
       handleDeleteClick: (cardId) => {
         formConfirm.open();
         formConfirm.getIdCard(cardId);
@@ -154,14 +175,21 @@ const formPopupAdd = new PopupWithForm((item) => {
       name: inputTitle.value,
       link: inputImageUrl.value,
       cardId: item._id,
+      owner: item.owner_id,
     })
     .then(() => {
-      console.log(card.owner);
-      const cardElement = card.generateCard(api.getUserInfo.user);
+      const cardElement = card.generateCard();
       cardList.prepend(cardElement);
       return cardElement;
     });
 }, ".popup_add");
+
+const formPhotoUser = new PopupWithForm(() => {
+  const imageUrl = document.querySelector(".photo-user");
+  api.updateImageUser(imageUrl).then(() => {
+    profileArt.src = imageUrl;
+  });
+}, ".popup_photo-user");
 
 const formValidator = new FormValidator(config, form);
 const formAddValidation = new FormValidator(config, formAdd);
@@ -172,7 +200,9 @@ formPopup.setEventListeners();
 formPopupAdd.setEventListeners();
 popupWithImage.setEventListeners();
 formConfirm.setEventListeners();
+formPhotoUser.setEventListeners();
 
+profileArt.addEventListener("click", () => formPhotoUser.open());
 addButton.addEventListener("click", () => formPopupAdd.open());
 closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
 editButton.addEventListener("click", () => {

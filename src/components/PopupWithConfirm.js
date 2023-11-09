@@ -13,6 +13,7 @@ export default class PopupWithConfirm extends Popup {
 
   handleIdCard() {
     this._submitHandler(this._elementId);
+    this._element.remove();
   }
 
   setEventListeners() {

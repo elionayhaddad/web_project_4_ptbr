@@ -24,12 +24,14 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            id="artist"
-            src="<%=require('./images/photo-elipse.png')%>"
-            class="profile__image"
-            alt="foto de um idoso apreciando a paisagem"
-          />
+          <div class="profile-overlay">
+            <img
+              id="artist"
+              src=""
+              class="profile__image photo-hover"
+              alt="foto de perfil do usuário"
+            />
+          </div>
           <div class="profile__info">
             <div class="profile__info-edit">
               <h2 class="profile__artist">Jacques Cousteau</h2>
@@ -54,7 +56,7 @@
           </button>
         </section>
         <section class="cards">
-          <template class="card-template">
+          <template class="card-template" id="template">
             <div class="card" id="card">
               <div class="card__remove">
                 <img
@@ -183,6 +185,32 @@
             type="submit"
           >
             Sim
+          </button>
+        </form>
+      </div>
+      <div class="popup popup_photo-user">
+        <div class="popup__overflow" id="overflow-add"></div>
+        <img
+          class="button button_close"
+          src="<%=require('./images/close-icon.png')%>"
+          alt="botão fechar"
+        />
+        <form class="popup__container form" name="register" novalidate>
+          <h3 class="popup__title">Alterar a foto de perfil</h3>
+          <fieldset class="popup__field">
+            <input
+              class="popup__field-txt photo-user"
+              required
+              type="url"
+              id="link-input"
+              name="link"
+              placeholder="URL da imagem"
+              minlength="1"
+            />
+            <span class="popup__input-error link-input-error"></span>
+          </fieldset>
+          <button class="button button_submit button_submit_add" type="submit">
+            Salvar
           </button>
         </form>
       </div>

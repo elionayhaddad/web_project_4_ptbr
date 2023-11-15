@@ -22,7 +22,6 @@ import PopupWithForm from "../components/PopupWithForm.js";
 
 import headerSrc from "../images/header.svg";
 import lineSrc from "../images/Line.svg";
-import artistSrc from "../images/photo-elipse.png";
 import editionSrc from "../images/button__edit.svg";
 import creationSrc from "../images/more.svg";
 import Api from "../components/Api.js";
@@ -38,7 +37,6 @@ headerLogo.src = headerSrc;
 headerLine.src = lineSrc;
 editProf.src = editionSrc;
 createCard.src = creationSrc;
-profileArt.src = artistSrc;
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_04",
@@ -55,167 +53,194 @@ api
     role: document.querySelector(".profile__text").textContent,
     _id: [],
   })
-  .then();
-
-function deleteCards(id) {
-  api.deleteCards(id).then();
-}
-const formConfirm = new PopupWithConfirm(".popup_remove", deleteCards);
-
-api.getCards().then((initialCards) => {
-  const section = new Section(
-    {
-      items: initialCards,
-      renderer: (item) => {
-        const card = new Card(
-          {
-            name: item.name,
-            imageUrl: item.link,
-            cardId: item._id,
-            likes: item.likes,
-            ownerId: item.owner._id,
-          },
-          {
-            cardSelector: ".card-template",
-            handleImageClick: (imageUrl, name) => {
-              popupWithImage.open(imageUrl, name);
-            },
-            checkId: (ownerId, buttonElement) => {
-              api.getUserInfo().then((item) => {
-                const userId = item._id;
-                const checkId = ownerId === userId;
-                if (!checkId) {
-                  buttonElement.classList.add("card__remove-icon_hidden");
-                } else {
-                  buttonElement.classList.remove("card__remove-icon_hidden");
-                }
-              });
-            },
-            handleDeleteClick: (cardId) => {
-              formConfirm.open();
-              formConfirm.getIdCard(cardId);
-            },
-            submitDelete: (id) => {
-              api.deleteCards(id).then();
-            },
-            handleLikeClick: (isLiked, cardId) => {
-              if (isLiked) {
-                return api.removeLikeCards(cardId);
-              } else {
-                return api.addLikeCards(cardId);
-              }
-            },
-            isLiked: [],
-          }
-        );
-        const cardElement = card.generateCard();
-        cardList.prepend(cardElement);
-        return cardElement;
-      },
-    },
-    ".cards"
-  );
-  section.renderItems(initialCards);
-});
-
-const popupWithImage = new PopupWithImage();
-
-const formPopup = new PopupWithForm(() => {
-  const user = new UserInfo({
-    nameSelector: ".profile__artist",
-    roleSelector: ".profile__text",
-  });
-  const newUser = user.setUserInfo();
-  api.editProfile(user._nameInput.value, user._roleInput.value).then(() => {
-    return newUser;
-  });
-}, ".popup");
-
-const formPopupAdd = new PopupWithForm((item) => {
-  const inputTitle = document.querySelector(".title-input");
-  const inputImageUrl = document.querySelector(".link-input");
-  const card = new Card(
-    {
-      name: inputTitle.value,
-      imageUrl: inputImageUrl.value,
-      cardId: item._id,
-      owner: api.getUserInfo,
-      likes: [],
-    },
-    {
-      cardSelector: ".card-template",
-      handleImageClick: (imageUrl, name) => {
-        popupWithImage.open(imageUrl, name);
-      },
-      checkId: (ownerId, buttonElement) => {
-        api.getUserInfo().then((item) => {
-          const userId = item._id;
-          const checkId = ownerId === userId;
-          if (checkId) {
-            return buttonElement;
-          }
-        });
-      },
-      handleDeleteClick: (cardId) => {
-        formConfirm.open();
-        formConfirm.getIdCard(cardId);
-      },
-      handleLikeClick: (isLiked, cardId) => {
-        if (isLiked) {
-          return api.removeLikeCards(cardId);
-        } else {
-          return api.addLikeCards(cardId);
-        }
-      },
-      isLiked: [],
+  .then((user) => {
+    function deleteCards(id) {
+      api.deleteCards(id).then();
     }
-  );
-  api
-    .createCards({
-      name: inputTitle.value,
-      link: inputImageUrl.value,
-      cardId: item._id,
-      owner: item.owner_id,
-    })
-    .then(() => {
-      const cardElement = card.generateCard();
-      cardList.prepend(cardElement);
-      return cardElement;
+    const formConfirm = new PopupWithConfirm(".popup_remove", deleteCards);
+
+    api.getCards().then((initialCards) => {
+      const section = new Section(
+        {
+          items: initialCards,
+          renderer: (item) => {
+            const card = new Card(
+              {
+                name: item.name,
+                imageUrl: item.link,
+                cardId: item._id,
+                likes: item.likes,
+                ownerId: item.owner._id,
+              },
+              {
+                cardSelector: ".card-template",
+                handleImageClick: (imageUrl, name) => {
+                  popupWithImage.open(imageUrl, name);
+                },
+                checkId: (ownerId, buttonElement) => {
+                  const checkId = ownerId === user._id;
+                  if (!checkId) {
+                    buttonElement.classList.add("card__remove-icon_hidden");
+                  } else {
+                    buttonElement.classList.remove("card__remove-icon_hidden");
+                  }
+                },
+                handleDeleteClick: (cardId) => {
+                  formConfirm.open();
+                  formConfirm.getIdCard(cardId);
+                },
+                submitDeletePopup: deleteCards,
+                handleLikeClick: (cardId, likeArray, likeCounter) => {
+                  const indexToRemove = likeArray.findIndex((obj) => {
+                    return obj._id === user._id;
+                  });
+                  if (indexToRemove !== -1) {
+                    api.removeLikeCards(cardId);
+                    likeArray.splice(indexToRemove, 1);
+                    likeCounter.innerHTML = likeArray.length;
+                  } else {
+                    api.addLikeCards(cardId);
+                    likeArray.push(user);
+                    likeCounter.innerHTML = likeArray.length;
+                  }
+                },
+                isLiked: (likeArray, buttonElement) => {
+                  const hasMyId = likeArray.some((obj) => {
+                    return obj._id === user._id;
+                  });
+                  if (hasMyId == true) {
+                    buttonElement.classList.add("card__like_active");
+                  } else {
+                    buttonElement.classList.remove("card__like_active");
+                  }
+                },
+              }
+            );
+            const cardElement = card.generateCard();
+            cardList.append(cardElement);
+            return cardElement;
+          },
+        },
+        ".cards"
+      );
+      section.renderItems(initialCards);
     });
-}, ".popup_add");
 
-const formPhotoUser = new PopupWithForm(() => {
-  const imageUrl = document.querySelector(".photo-user");
-  api.updateImageUser(imageUrl).then(() => {
-    profileArt.src = imageUrl;
+    const popupWithImage = new PopupWithImage();
+
+    const formPopup = new PopupWithForm(() => {
+      const user = new UserInfo({
+        nameSelector: ".profile__artist",
+        roleSelector: ".profile__text",
+      });
+      const newUser = user.setUserInfo();
+      api.editProfile(user._nameInput.value, user._roleInput.value).then(() => {
+        return newUser;
+      });
+    }, ".popup");
+
+    const formPopupAdd = new PopupWithForm((item) => {
+      const inputTitle = document.querySelector(".title-input");
+      const inputImageUrl = document.querySelector(".link-input");
+      const card = new Card(
+        {
+          name: inputTitle.value,
+          imageUrl: inputImageUrl.value,
+          cardId: item._id,
+          likes: [],
+        },
+        {
+          cardSelector: ".card-template",
+          handleImageClick: (imageUrl, name) => {
+            popupWithImage.open(imageUrl, name);
+          },
+          checkId: (ownerId, buttonElement) => {
+            const checkId = ownerId === user._id;
+            if (checkId) {
+              buttonElement.classList.remove("card__remove-icon_hidden");
+            }
+          },
+          handleDeleteClick: (cardId) => {
+            formConfirm.open();
+            formConfirm.getIdCard(cardId);
+          },
+          submitDeletePopup: deleteCards,
+          handleLikeClick: (cardId, likeArray, likeCounter) => {
+            const indexToRemove = likeArray.findIndex((obj) => {
+              return obj._id === user._id;
+            });
+            if (indexToRemove !== -1) {
+              api.removeLikeCards(cardId);
+              likeArray.splice(indexToRemove, 1);
+              likeCounter.innerHTML = likeArray.length;
+            } else {
+              api.addLikeCards(cardId);
+              likeArray.push(user);
+              likeCounter.innerHTML = likeArray.length;
+            }
+          },
+          isLiked: (likeArray, buttonElement) => {
+            const hasMyId = likeArray.some((obj) => {
+              return obj._id === user._id;
+            });
+            if (hasMyId == true) {
+              buttonElement.classList.add("card__like_active");
+            } else {
+              buttonElement.classList.remove("card__like_active");
+            }
+          },
+        }
+      );
+      api
+        .createCards({
+          name: inputTitle.value,
+          link: inputImageUrl.value,
+        })
+        .then((item) => {
+          card._cardId = item._id;
+          card.likes = item.likes;
+          const cardElement = card.generateCard();
+          cardList.prepend(cardElement);
+          return cardElement;
+        });
+    }, ".popup_add");
+
+    const formPhotoUser = new PopupWithForm(() => {
+      const imageUrl = document.querySelector(".photo-user");
+      api
+        .updateImageUser(imageUrl.value)
+        .then()
+        .then(() => {
+          profileArt.src = imageUrl.value; ////////////////////resolver isso
+        });
+    }, ".popup_photo-user");
+
+    const formValidator = new FormValidator(config, form);
+    const formAddValidation = new FormValidator(config, formAdd);
+    formAddValidation.enableValidation();
+    formValidator.enableValidation();
+
+    formPopup.setEventListeners();
+    formPopupAdd.setEventListeners();
+    popupWithImage.setEventListeners();
+    formConfirm.setEventListeners();
+    formPhotoUser.setEventListeners();
+
+    profileArt.addEventListener("click", () => formPhotoUser.open());
+    addButton.addEventListener("click", () => formPopupAdd.open());
+    closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
+    editButton.addEventListener("click", () => {
+      formPopup.open();
+      const populateForm = new UserInfo(
+        {
+          nameSelector: ".profile__artist",
+          roleSelector: ".profile__text",
+        },
+        ".popup"
+      );
+      return populateForm.getUserInfo();
+    });
+    closeButtonImg.addEventListener("click", () => popupWithImage.close());
+    closeButtonRemove.addEventListener("click", () => formConfirm.close());
+    closeButton.addEventListener("click", () => formPopup.close());
   });
-}, ".popup_photo-user");
-
-const formValidator = new FormValidator(config, form);
-const formAddValidation = new FormValidator(config, formAdd);
-formAddValidation.enableValidation();
-formValidator.enableValidation();
-
-formPopup.setEventListeners();
-formPopupAdd.setEventListeners();
-popupWithImage.setEventListeners();
-formConfirm.setEventListeners();
-formPhotoUser.setEventListeners();
-
-profileArt.addEventListener("click", () => formPhotoUser.open());
-addButton.addEventListener("click", () => formPopupAdd.open());
-closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
-editButton.addEventListener("click", () => {
-  formPopup.open();
-  const populateForm = new UserInfo(
-    {
-      nameSelector: ".profile__artist",
-      roleSelector: ".profile__text",
-    },
-    ".popup"
-  );
-  return populateForm.getUserInfo();
-});
-closeButtonImg.addEventListener("click", () => popupWithImage.close());
-closeButtonRemove.addEventListener("click", () => formConfirm.close());
-closeButton.addEventListener("click", () => formPopup.close());

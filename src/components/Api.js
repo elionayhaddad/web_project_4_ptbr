@@ -11,7 +11,7 @@ export default class Api {
       user,
     }).then((res) => {
       if (res.ok) {
-        return res.json(user);
+        return res.json();
       }
       return Promise.reject();
     });
@@ -104,7 +104,7 @@ export default class Api {
       headers: this.headers,
     }).then((res) => {
       if (res.ok) {
-        return res.json(avatar);
+        return res.json();
       }
 
       return Promise.reject();

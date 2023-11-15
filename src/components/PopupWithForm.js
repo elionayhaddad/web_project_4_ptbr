@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
       values[input.name] = input.value;
     });
     return values;
-  }
+  } 
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {

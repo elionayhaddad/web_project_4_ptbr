@@ -11,6 +11,7 @@ export default class Card {
     this._handleImageClick = config.handleImageClick;
     this._checkId = config.checkId;
     this._handleDeleteClick = config.handleDeleteClick;
+    this._submitDeletePopup = config.submitDeletePopup;
     this._handleLikeClick = config.handleLikeClick;
     this._isLiked = config.isLiked;
   }
@@ -26,6 +27,7 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListener();
+
     const titleElement = this._element.querySelector(".card__title");
     const linkElement = this._element.querySelector(".card__image");
     const likeCount = this._element.querySelector(".card__counter");
@@ -45,13 +47,24 @@ export default class Card {
     const linkElement = this._element.querySelector(".card__image");
     const likeButtonElement = this._element.querySelector(".card__like");
 
+    this._isLiked(this._likes, likeButtonElement);
     likeButtonElement.addEventListener("click", (evt) => {
-      this._handleLikeClick(this._isLiked, this._cardId).then(() => {
-        evt.target.classList.toggle("card__like_active");
-      });
+      this._isLiked(this._likes, likeButtonElement);
+      this._handleLikeClick(
+        this._cardId,
+        this._likes,
+        this._element.querySelector(".card__counter")
+      );
+      evt.target.classList.toggle("card__like_active");
     });
+
     removeButton.addEventListener("click", () => {
-      this._handleDeleteClick();
+      this._cardIdClicked = this._cardId;
+      this._handleDeleteClick(this._cardIdClicked);
+      popupRemove.addEventListener("submit", () => {
+        this._submitDeletePopup();
+        this._element.remove();
+      });
     });
 
     linkElement.addEventListener("click", () => {

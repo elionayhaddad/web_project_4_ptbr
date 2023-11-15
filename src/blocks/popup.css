@@ -152,7 +152,7 @@
     width: 83%;
     max-width: 238px;
     line-height: 22px;
-    margin: 25px auto 76px;
+    margin: 25px auto 56px;
     color: #000;
     font-size: 18px;
   }
@@ -165,7 +165,7 @@
     max-width: 238px;
     height: 100%;
     max-height: 26px;
-    margin: 0 auto 30px;
+    margin: 0 auto 40px;
   }
   .popup__field-txt {
     width: 100%;

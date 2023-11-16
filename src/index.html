@@ -34,7 +34,7 @@
           </div>
           <div class="profile__info">
             <div class="profile__info-edit">
-              <h2 class="profile__artist">Jacques Cousteau</h2>
+              <h2 class="profile__artist"></h2>
               <button class="button button_profile" type="submit">
                 <img
                   id="edition"
@@ -44,7 +44,7 @@
                 />
               </button>
             </div>
-            <p class="profile__text">Explorar</p>
+            <p class="profile__text"></p>
           </div>
           <button class="button button_add" type="submit">
             <img
@@ -88,7 +88,7 @@
           src="<%=require('./images/close-icon.png')%>"
           alt="botão fechar"
         />
-        <form class="popup__container" name="register" novalidate>
+        <form class="popup__container form" name="register" novalidate>
           <h3 class="popup__title">Editar perfil</h3>
           <fieldset class="popup__field">
             <input
@@ -191,27 +191,30 @@
       <div class="popup popup_photo-user">
         <div class="popup__overflow" id="overflow-add"></div>
         <img
-          class="button button_close"
+          class="button button_close button_close_photo-user"
           src="<%=require('./images/close-icon.png')%>"
           alt="botão fechar"
         />
-        <form class="popup__container form" name="register" novalidate>
-          <h3 class="popup__title">Alterar a foto de perfil</h3>
+        <form
+          class="popup__container-photo-user form"
+          name="register"
+          novalidate
+        >
+          <h3 class="popup__title popup__title_photo-user">
+            Alterar a foto de perfil
+          </h3>
           <fieldset class="popup__field">
             <input
-              class="popup__field-txt photo-user"
+              class="popup__field-txt input-photo-user"
               required
               type="url"
-              id="link-input"
               name="link"
               placeholder="URL da imagem"
               minlength="1"
             />
             <span class="popup__input-error link-input-error"></span>
           </fieldset>
-          <button class="button button_submit button_submit_add" type="submit">
-            Salvar
-          </button>
+          <button class="button button_submit" type="submit">Salvar</button>
         </form>
       </div>
       <footer class="footer">

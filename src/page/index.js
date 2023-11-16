@@ -3,6 +3,7 @@ import {
   cardList,
   form,
   formAdd,
+  formPhoto,
   editButton,
   addButton,
   closeButton,
@@ -12,6 +13,7 @@ import {
   config,
   closeButtonRemove,
   btnSubmitConfirm,
+  closeButtonPhotoUser,
 } from "../components/utils.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
@@ -54,6 +56,10 @@ api
     _id: [],
   })
   .then((user) => {
+    profileArt.src = user.avatar;
+    document.querySelector(".profile__artist").innerHTML = user.name;
+    document.querySelector(".profile__text").innerHTML = user.about;
+
     function deleteCards(id) {
       api.deleteCards(id).then();
     }
@@ -206,17 +212,18 @@ api
     }, ".popup_add");
 
     const formPhotoUser = new PopupWithForm(() => {
-      const imageUrl = document.querySelector(".photo-user");
-      api
-        .updateImageUser(imageUrl.value)
-        .then()
-        .then(() => {
-          profileArt.src = imageUrl.value; ////////////////////resolver isso
-        });
+      const imageUrl = document.querySelector(".input-photo-user").value;
+      console.log(
+        api.updateImageUser(imageUrl).then((image) => {
+          console.log(image);
+        })
+      );
     }, ".popup_photo-user");
 
     const formValidator = new FormValidator(config, form);
     const formAddValidation = new FormValidator(config, formAdd);
+    const formPhotoUserValidation = new FormValidator(config, formPhoto);
+    formPhotoUserValidation.enableValidation();
     formAddValidation.enableValidation();
     formValidator.enableValidation();
 
@@ -229,6 +236,7 @@ api
     profileArt.addEventListener("click", () => formPhotoUser.open());
     addButton.addEventListener("click", () => formPopupAdd.open());
     closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
+    closeButtonPhotoUser.addEventListener("click", () => formPhotoUser.close());
     editButton.addEventListener("click", () => {
       formPopup.open();
       const populateForm = new UserInfo(

@@ -56,6 +56,19 @@
   background: #fff;
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
 }
+.popup__container-photo-user {
+  position: absolute;
+  width: 34%;
+  max-width: 430px;
+  height: 100%;
+  max-height: 272px;
+  display: flex;
+  flex-direction: column;
+  z-index: 4;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+}
 .popup__title {
   margin: 34px 64px 54px 36px;
   color: #000;
@@ -65,7 +78,6 @@
   line-height: 29px;
 }
 .popup__title_question {
-  margin: 34px 64px 20px 36px;
   line-height: normal;
 }
 .popup__field {
@@ -147,6 +159,12 @@
     height: 100%;
     max-height: 322px;
     margin-top: 0;
+  }
+  .popup__container-photo-user {
+    width: 80%;
+    max-width: 282px;
+    height: 100%;
+    max-height: 282px;
   }
   .popup__title {
     width: 83%;

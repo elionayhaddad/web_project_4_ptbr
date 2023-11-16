@@ -68,6 +68,10 @@
   right: 15%;
   z-index: 4;
 }
+.button_close_photo-user {
+  position: absolute;
+  top: 22%;
+}
 .button_submit {
   width: 82%;
   max-width: 358px;
@@ -133,7 +137,7 @@
     height: 100%;
     max-height: 26px;
     position: absolute;
-    top: 18%;
+    top: 15%;
     right: 30%;
   }
   .button_close_remove {
@@ -144,6 +148,10 @@
   .button_close_image {
     position: absolute;
     top: 2%;
+  }
+  .button_close_photo-user {
+    position: absolute;
+    top: 18%;
   }
   .button_submit {
     width: 85%;

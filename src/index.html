@@ -24,14 +24,13 @@
       </header>
       <main class="content">
         <section class="profile">
-          <div class="profile-overlay">
-            <img
-              id="artist"
-              src=""
-              class="profile__image photo-hover"
-              alt="foto de perfil do usuário"
-            />
-          </div>
+          <img
+            id="artist"
+            src=" "
+            class="profile__image photo-hover"
+            alt="foto de perfil do usuário"
+          />
+          <div class="profile__overlay"></div>
           <div class="profile__info">
             <div class="profile__info-edit">
               <h2 class="profile__artist"></h2>
@@ -189,7 +188,7 @@
         </form>
       </div>
       <div class="popup popup_photo-user">
-        <div class="popup__overflow" id="overflow-add"></div>
+        <div class="popup__overflow"></div>
         <img
           class="button button_close button_close_photo-user"
           src="<%=require('./images/close-icon.png')%>"

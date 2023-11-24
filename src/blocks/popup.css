@@ -79,6 +79,7 @@
 }
 .popup__title_question {
   line-height: normal;
+  margin-bottom: 20px;
 }
 .popup__field {
   width: 82%;

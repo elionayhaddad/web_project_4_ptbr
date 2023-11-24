@@ -89,6 +89,9 @@
 .button_submit:hover {
   opacity: 0.8;
 }
+.button_submit_confirm {
+  max-height: 100px;
+}
 .button_inactive {
   cursor: default;
   background-color: white;

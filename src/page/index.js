@@ -6,14 +6,17 @@ import {
   formPhoto,
   editButton,
   addButton,
+  btnSubmit,
+  btnSubmitAdd,
+  btnSubmitConfirm,
+  btnSubmitPhotoUser,
   closeButton,
   closeButtonAdd,
   closeButtonImg,
-  removeButton,
   config,
   closeButtonRemove,
-  btnSubmitConfirm,
   closeButtonPhotoUser,
+  photoUserBtn,
 } from "../components/utils.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
@@ -60,10 +63,31 @@ api
     document.querySelector(".profile__artist").innerHTML = user.name;
     document.querySelector(".profile__text").innerHTML = user.about;
 
+    const formPhotoUser = new PopupWithForm(
+      () => {
+        const newImageUrl = document.querySelector(".input-photo-user").value;
+        api.updateImageUser(newImageUrl).then();
+        profileArt.src = newImageUrl;
+        setTimeout(() => {
+          btnSubmitPhotoUser.textContent = "Salvando...";
+        }, 0);
+      },
+      ".popup_photo-user",
+      btnSubmitPhotoUser,
+      profileArt
+    );
+
     function deleteCards(id) {
       api.deleteCards(id).then();
+      setTimeout(() => {
+        btnSubmitConfirm.textContent = "Salvando...";
+      }, 0);
     }
-    const formConfirm = new PopupWithConfirm(".popup_remove", deleteCards);
+    const formConfirm = new PopupWithConfirm(
+      ".popup_remove",
+      deleteCards,
+      btnSubmitConfirm
+    );
 
     api.getCards().then((initialCards) => {
       const section = new Section(
@@ -134,91 +158,100 @@ api
 
     const popupWithImage = new PopupWithImage();
 
-    const formPopup = new PopupWithForm(() => {
-      const user = new UserInfo({
-        nameSelector: ".profile__artist",
-        roleSelector: ".profile__text",
-      });
-      const newUser = user.setUserInfo();
-      api.editProfile(user._nameInput.value, user._roleInput.value).then(() => {
-        return newUser;
-      });
-    }, ".popup");
-
-    const formPopupAdd = new PopupWithForm((item) => {
-      const inputTitle = document.querySelector(".title-input");
-      const inputImageUrl = document.querySelector(".link-input");
-      const card = new Card(
-        {
-          name: inputTitle.value,
-          imageUrl: inputImageUrl.value,
-          cardId: item._id,
-          likes: [],
-        },
-        {
-          cardSelector: ".card-template",
-          handleImageClick: (imageUrl, name) => {
-            popupWithImage.open(imageUrl, name);
-          },
-          checkId: (ownerId, buttonElement) => {
-            const checkId = ownerId === user._id;
-            if (checkId) {
-              buttonElement.classList.remove("card__remove-icon_hidden");
-            }
-          },
-          handleDeleteClick: (cardId) => {
-            formConfirm.open();
-            formConfirm.getIdCard(cardId);
-          },
-          submitDeletePopup: deleteCards,
-          handleLikeClick: (cardId, likeArray, likeCounter) => {
-            const indexToRemove = likeArray.findIndex((obj) => {
-              return obj._id === user._id;
-            });
-            if (indexToRemove !== -1) {
-              api.removeLikeCards(cardId);
-              likeArray.splice(indexToRemove, 1);
-              likeCounter.innerHTML = likeArray.length;
-            } else {
-              api.addLikeCards(cardId);
-              likeArray.push(user);
-              likeCounter.innerHTML = likeArray.length;
-            }
-          },
-          isLiked: (likeArray, buttonElement) => {
-            const hasMyId = likeArray.some((obj) => {
-              return obj._id === user._id;
-            });
-            if (hasMyId == true) {
-              buttonElement.classList.add("card__like_active");
-            } else {
-              buttonElement.classList.remove("card__like_active");
-            }
-          },
-        }
-      );
-      api
-        .createCards({
-          name: inputTitle.value,
-          link: inputImageUrl.value,
-        })
-        .then((item) => {
-          card._cardId = item._id;
-          card.likes = item.likes;
-          const cardElement = card.generateCard();
-          cardList.prepend(cardElement);
-          return cardElement;
+    const formPopup = new PopupWithForm(
+      () => {
+        setTimeout(() => {
+          btnSubmit.textContent = "Salvando...";
+        }, 0);
+        const user = new UserInfo({
+          nameSelector: ".profile__artist",
+          roleSelector: ".profile__text",
         });
-    }, ".popup_add");
+        const newUser = user.setUserInfo();
+        api
+          .editProfile(user._nameInput.value, user._roleInput.value)
+          .then(() => {
+            return newUser;
+          });
+      },
+      ".popup",
+      btnSubmit,
+      editButton
+    );
 
-    const formPhotoUser = new PopupWithForm(() => {
-      const imageUrl = document.querySelector(".input-photo-user").value;
-      console.log(
-        api.updateImageUser(imageUrl).then((image) => {
-          console.log(image);
-        })
-      );
-    }, ".popup_photo-user");
+    const formPopupAdd = new PopupWithForm(
+      (item) => {
+        const inputTitle = document.querySelector(".title-input");
+        const inputImageUrl = document.querySelector(".link-input");
+        setTimeout(() => {
+          btnSubmitAdd.textContent = "Salvando...";
+        }, 0);
+        const card = new Card(
+          {
+            name: inputTitle.value,
+            imageUrl: inputImageUrl.value,
+            cardId: item._id,
+            likes: [],
+          },
+          {
+            cardSelector: ".card-template",
+            handleImageClick: (imageUrl, name) => {
+              popupWithImage.open(imageUrl, name);
+            },
+            checkId: (ownerId, buttonElement) => {
+              const checkId = ownerId === user._id;
+              if (checkId) {
+                buttonElement.classList.remove("card__remove-icon_hidden");
+              }
+            },
+            handleDeleteClick: (cardId) => {
+              formConfirm.open();
+              formConfirm.getIdCard(cardId);
+            },
+            submitDeletePopup: deleteCards,
+            handleLikeClick: (cardId, likeArray, likeCounter) => {
+              const indexToRemove = likeArray.findIndex((obj) => {
+                return obj._id === user._id;
+              });
+              if (indexToRemove !== -1) {
+                api.removeLikeCards(cardId);
+                likeArray.splice(indexToRemove, 1);
+                likeCounter.innerHTML = likeArray.length;
+              } else {
+                api.addLikeCards(cardId);
+                likeArray.push(user);
+                likeCounter.innerHTML = likeArray.length;
+              }
+            },
+            isLiked: (likeArray, buttonElement) => {
+              const hasMyId = likeArray.some((obj) => {
+                return obj._id === user._id;
+              });
+              if (hasMyId == true) {
+                buttonElement.classList.add("card__like_active");
+              } else {
+                buttonElement.classList.remove("card__like_active");
+              }
+            },
+          }
+        );
+        api
+          .createCards({
+            name: inputTitle.value,
+            link: inputImageUrl.value,
+          })
+          .then((item) => {
+            card._cardId = item._id;
+            card.likes = item.likes;
+            const cardElement = card.generateCard();
+            cardList.prepend(cardElement);
+            return cardElement;
+          });
+      },
+      ".popup_add",
+      btnSubmitAdd,
+      addButton
+    );
 
     const formValidator = new FormValidator(config, form);
     const formAddValidation = new FormValidator(config, formAdd);
@@ -233,7 +266,7 @@ api
     formConfirm.setEventListeners();
     formPhotoUser.setEventListeners();
 
-    profileArt.addEventListener("click", () => formPhotoUser.open());
+    photoUserBtn.addEventListener("click", () => formPhotoUser.open());
     addButton.addEventListener("click", () => formPopupAdd.open());
     closeButtonAdd.addEventListener("click", () => formPopupAdd.close());
     closeButtonPhotoUser.addEventListener("click", () => formPhotoUser.close());

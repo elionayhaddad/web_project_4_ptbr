@@ -1,10 +1,12 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(submitHandler, popupSelector) {
+  constructor(submitHandler, popupSelector, buttonElement, buttonPopup) {
     super(popupSelector);
     this._form = this._popup.querySelector(".form");
     this._submitHandler = submitHandler;
+    this._buttonElement = buttonElement;
+    this._buttonPopup = buttonPopup;
   }
   _getInputValues() {
     const inputElement = this._form.querySelectorAll(".popup__field-txt");
@@ -14,8 +16,11 @@ export default class PopupWithForm extends Popup {
     });
     return values;
   }
+  open() {
+    super.open();
+    this._buttonElement.textContent = "Salvar";
+  }
   setEventListeners() {
-    super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._submitHandler(this._getInputValues());
